@@ -4,8 +4,8 @@
     "brandLine": "furniture atelier",
     "title": "OLGA — мебель по индивидуальному проекту",
     "description": "Цифровой интерьерный showroom: кухни, гардеробные, шкафы и гостиные по индивидуальному проекту. Собственное производство, премиальные материалы, монтаж под ключ.",
-    "url": "https://example.com",
-    "og": "media/og.jpg",
+    "url": "https://olga-site14.vercel.app",
+    "og": "https://olga-site14.vercel.app/media/og.jpg",
     "locale": "ru_RU"
   },
   "contacts": {
