@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System «Olga»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="components.css">
+<style>
+  .doc-note { border-left: 2px solid var(--accent); padding-left: var(--s-4); color: var(--fg-muted); font-size: var(--t-caption); }
+  .specimen { border-top: 1px solid var(--border); padding-top: var(--s-4); margin-top: var(--s-5); }
+  .ref-grid { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  .ref-grid figure { margin: 0; }
+  .ref-grid img { border-radius: var(--r-md); border: 1px solid var(--border); }
+  .ref-grid figcaption { margin-top: var(--s-2); }
+  .grid-demo { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gutter); }
+  .grid-demo span { height: 56px; background: color-mix(in srgb, var(--accent) 16%, transparent); border-radius: var(--r-sm); }
+  .rhythm-bar { display: flex; flex-direction: column; gap: var(--s-2); }
+  .rhythm-bar div { background: var(--c-clay); border-radius: var(--r-sm); display: flex; align-items: center; padding-inline: var(--s-4); font-size: var(--t-label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--c-espresso); }
+</style>
+</head>
+<body>
+
+<!-- ================= HERO: фото интерьера (rep1) + шрифт и раскладка (rep5) ============= -->
+<header class="hero hero--photo">
+  <div class="hero__media"><img src="references/hero.jpg" alt="Интерьер"></div>
+  <div class="hero__nav container">
+    <div class="nav" style="color:#fff">
+      <span class="nav__logo">Olga</span>
+      <nav class="nav__links eyebrow" style="color:rgba(255,255,255,.85)">
+        <a href="#color">Цвет</a><a href="#type">Типографика</a><a href="#grid">Сетка</a>
+        <a href="#rhythm">Ритм</a><a href="#components">Компоненты</a>
+      </nav>
+    </div>
+  </div>
+  <div class="hero__inner airy">
+    <span class="eyebrow">Design system · rep1—rep5</span>
+    <h1 class="t-hero">Спокойный<br>комфорт</h1>
+    <p class="hero__sub t-body-lg" style="color:rgba(255,255,255,.9)">
+      Одна система из пяти референсов: тёплая нейтральная база, контрастная антиква,
+      карточный ритм и живой фон.
+    </p>
+    <div class="cluster">
+      <a class="btn btn--on-photo" href="#color">Смотреть систему</a>
+      <a class="btn btn--on-photo" href="#components">Компоненты</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= РЕФЕРЕНСЫ ============= -->
+<section class="section">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow">Источники</span>
+      <h2>Пять референсов — одна система</h2>
+      <p class="t-muted">Что взято из каждого.</p>
+    </div>
+    <div class="ref-grid">
+      <figure><img src="references/rep1.jpeg" alt="rep1"><figcaption class="t-caption"><strong>rep1</strong> — фото интерьера, гротеск, лента карточек, промо-полоса</figcaption></figure>
+      <figure><img src="references/rep2.jpeg" alt="rep2"><figcaption class="t-caption"><strong>rep2</strong> — блочная модель: карточка, шаг 8px, липкий CTA</figcaption></figure>
+      <figure><img src="references/rep3.jpeg" alt="rep3"><figcaption class="t-caption"><strong>rep3</strong> — палитра песка и моря, ощущение комфорта</figcaption></figure>
+      <figure><img src="references/rep4.jpeg" alt="rep4"><figcaption class="t-caption"><strong>rep4</strong> — фон-небо под анимацию</figcaption></figure>
+      <figure><img src="references/rep5.jpeg" alt="rep5"><figcaption class="t-caption"><strong>rep5</strong> — антиква, охра, тёмный hero, арки</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ЦВЕТ ============= -->
+<section class="section section--alt" id="color">
+  <div class="container stack-lg">
+    <div class="section__head">
+      <span class="eyebrow">01 — Палитра</span>
+      <h2>85 / 10 / 5</h2>
+      <p class="t-muted">Нейтраль — тёмный якорь — акцент. Ни чистого белого, ни чистого чёрного:
+        фон тёплый, «чёрный» коричневатый, акцент — цвет материала.</p>
+    </div>
+
+    <div>
+      <p class="eyebrow">База (rep3 + rep5)</p>
+      <div class="swatches">
+        <div class="swatch"><div class="swatch__chip" style="background:#F6F3EF"></div><div class="swatch__meta"><strong>ivory</strong><span class="t-caption">#F6F3EF · фон</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:#EFE9E1"></div><div class="swatch__meta"><strong>sand</strong><span class="t-caption">#EFE9E1 · секции, карточка</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:#DED3C6"></div><div class="swatch__meta"><strong>clay</strong><span class="t-caption">#DED3C6 · границы</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:#9A9490"></div><div class="swatch__meta"><strong>stone</strong><span class="t-caption">#9A9490 · вторичный текст</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:#352E2C"></div><div class="swatch__meta"><strong>espresso</strong><span class="t-caption">#352E2C · якорь</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:#1F1A18"></div><div class="swatch__meta"><strong>ink</strong><span class="t-caption">#1F1A18 · текст</span></div></div>
+      </div>
+    </div>
+
+    <div>
+      <p class="eyebrow">Акценты</p>
+      <div class="swatches">
+        <div class="swatch"><div class="swatch__chip" style="background:#8E621C"></div><div class="swatch__meta"><strong>ochre</strong><span class="t-caption">#8E621C · rep5</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:#AA5013"></div><div class="swatch__meta"><strong>terracotta</strong><span class="t-caption">#AA5013 · rep2</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:#6F8D9D"></div><div class="swatch__meta"><strong>sea</strong><span class="t-caption">#6F8D9D · rep3</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:#989F9D"></div><div class="swatch__meta"><strong>sage</strong><span class="t-caption">#989F9D · rep3</span></div></div>
+        <div class="swatch"><div class="swatch__chip" style="background:linear-gradient(180deg,#4476A7,#669FD4,#ABCCEF,#D9E5F1)"></div><div class="swatch__meta"><strong>sky 1—4</strong><span class="t-caption">rep4 · анимируемый фон</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ТИПОГРАФИКА ============= -->
+<section class="section" id="type">
+  <div class="container stack-lg">
+    <div class="section__head">
+      <span class="eyebrow">02 — Типографика</span>
+      <h2>Два голоса</h2>
+      <p class="t-muted">Контрастная антиква для героя (rep5, rep3, rep4) и геометрический
+        гротеск для всего остального (rep1, rep2). Между H1 и телом — скачок, а не лестница.</p>
+    </div>
+
+    <div class="specimen"><span class="eyebrow">t-hero · Playfair Display 400 · 0.95 / −0.02em</span>
+      <div class="t-hero">Комфорт</div></div>
+    <div class="specimen"><span class="eyebrow">h1 · clamp(2.5–4.5rem)</span>
+      <h1>Experience Luxury Living</h1></div>
+    <div class="specimen"><span class="eyebrow">h2 · clamp(1.75–2.75rem)</span>
+      <h2>Featured Collection</h2></div>
+    <div class="specimen"><span class="eyebrow">h3 · Jost 500 · 1.25rem</span>
+      <h3>Cloud Sectional Sofa</h3></div>
+    <div class="specimen"><span class="eyebrow">body · Jost 400 · 1rem / 1.65 · max 68ch</span>
+      <p>Мягкие формы, натуральные ткани и тёплый свет. Текстовая строка никогда не шире
+        68 символов — глаз не теряет начало следующей строки.</p></div>
+    <div class="specimen"><span class="eyebrow">label · uppercase · +0.14em</span>
+      <div class="t-label" style="color:var(--fg)">Handcrafted since 1976</div></div>
+  </div>
+</section>
+
+<!-- ================= СЕТКА ============= -->
+<section class="section section--alt" id="grid">
+  <div class="container stack-lg">
+    <div class="section__head">
+      <span class="eyebrow">03 — Сетка</span>
+      <h2>12 колонок, три раскладки</h2>
+      <p class="t-muted">Контейнер 1440, поля 24/48/80, gutter 24. Реально используются только
+        <code>12</code>, <code>4-4-4</code> и <code>6-6</code> — как во всех пяти референсах.</p>
+    </div>
+    <div class="grid-demo">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="g-6-6">
+      <h2>6 — 6</h2>
+      <p class="t-muted">Заголовок слева, текст справа — приём из нижнего блока rep5.
+        На мобильном схлопывается в одну колонку.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= РИТМ ============= -->
+<section class="section" id="rhythm">
+  <div class="container stack-lg">
+    <div class="section__head">
+      <span class="eyebrow">04 — Ритм и пространство</span>
+      <h2>Шумно — тихо — шумно</h2>
+      <p class="t-muted">Плотный блок всегда окружён паузой. Шаг сетки 8px.
+        Воздуха вокруг заголовка не меньше, чем его кегль.</p>
+    </div>
+    <div class="rhythm-bar">
+      <div style="height:48px">Служебная полоса · 48</div>
+      <div style="height:160px;background:var(--c-sea);color:#fff">Hero · 88vh</div>
+      <div style="height:96px;background:transparent;border:1px dashed var(--c-clay)">Пауза · 96 / 128</div>
+      <div style="height:120px">Лента карточек · gap 24</div>
+      <div style="height:96px;background:transparent;border:1px dashed var(--c-clay)">Пауза · 96 / 128</div>
+      <div style="height:80px;background:var(--c-espresso);color:var(--c-ivory)">Футер · 96 / 48</div>
+    </div>
+    <p class="doc-note">Тени почти не используются: глубина создаётся сменой фона
+      (светлая карточка на светлом поле — rep2), а не затемнением.</p>
+  </div>
+</section>
+
+<!-- ================= КОМПОНЕНТЫ ============= -->
+<section class="section section--alt" id="components">
+  <div class="container stack-lg">
+    <div class="section__head">
+      <span class="eyebrow">05 — Компоненты</span>
+      <h2>Кнопки, бейджи, карточки</h2>
+    </div>
+
+    <div class="cluster">
+      <button class="btn btn--dark">Shop now</button>
+      <button class="btn btn--ghost">View all</button>
+      <button class="btn btn--accent">IDR 1 080 000</button>
+      <span class="badge">New</span>
+      <span class="badge badge--accent">−10%</span>
+    </div>
+
+    <div class="marquee" role="presentation">
+      <div class="marquee__track">
+        <span>Sofas 15% off — code COZY15</span><span class="marquee__sep">/</span>
+        <span>Dining tables from $199</span><span class="marquee__sep">/</span>
+        <span>Free shipping over $200</span><span class="marquee__sep">/</span>
+        <span>Sofas 15% off — code COZY15</span><span class="marquee__sep">/</span>
+        <span>Dining tables from $199</span><span class="marquee__sep">/</span>
+        <span>Free shipping over $200</span><span class="marquee__sep">/</span>
+      </div>
+    </div>
+
+    <div>
+      <p class="eyebrow">Карточка товара · 4-4-4 (rep2)</p>
+      <div class="g-4-4-4">
+        <article class="card">
+          <div class="card__media"><span class="badge">New</span><img src="references/ph-sofa.jpg" alt=""></div>
+          <div class="card__body"><h3>Cloud Sectional Sofa</h3><span class="price"><strong>$1 290</strong> USD</span></div>
+        </article>
+        <article class="card">
+          <div class="card__media"><img src="references/ph-interior.jpg" alt=""></div>
+          <div class="card__body"><h3>Harbour Lounge</h3><span class="price"><strong>$980</strong> USD</span></div>
+        </article>
+        <article class="card">
+          <div class="card__media"><img src="references/ph-chair.jpg" alt=""></div>
+          <div class="card__body"><h3>Modern Chair</h3><span class="price"><strong>$249</strong> USD</span></div>
+        </article>
+      </div>
+    </div>
+
+    <div>
+      <p class="eyebrow">Фото-арка · Featured (rep5)</p>
+      <div class="g-4-4-4">
+        <div class="arch-item"><div class="arch"><img src="references/ph-chair.jpg" alt=""></div>
+          <div><div class="t-label" style="color:var(--fg)">Modern chair</div><span class="price">$249.00 USD</span></div></div>
+        <div class="arch-item"><div class="arch"><img src="references/ph-lamp.jpg" alt=""></div>
+          <div><div class="t-label" style="color:var(--fg)">Elegant lamp</div><span class="price">$129.00 USD</span></div></div>
+        <div class="arch-item"><div class="arch"><img src="references/ph-dark.jpg" alt=""></div>
+          <div><div class="t-label" style="color:var(--fg)">Black chair</div><span class="price">$199.00 USD</span></div></div>
+      </div>
+    </div>
+
+    <div>
+      <p class="eyebrow">Горизонтальная лента (rep1)</p>
+      <div class="rail">
+        <article class="card"><div class="card__media"><img src="references/ph-lamp.jpg" alt=""></div><div class="card__body"><h3>Velvet Dining Chair</h3><span class="price"><strong>$180</strong></span></div></article>
+        <article class="card"><div class="card__media"><img src="references/ph-interior.jpg" alt=""></div><div class="card__body"><h3>Lounge Seating</h3><span class="price"><strong>$740</strong></span></div></article>
+        <article class="card"><div class="card__media"><img src="references/ph-sofa.jpg" alt=""></div><div class="card__body"><h3>Cloud Sofa</h3><span class="price"><strong>$1 290</strong></span></div></article>
+        <article class="card"><div class="card__media"><img src="references/ph-chair.jpg" alt=""></div><div class="card__body"><h3>Storage Bed</h3><span class="price"><strong>$860</strong></span></div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= АНИМИРУЕМЫЙ ФОН (rep4) ============= -->
+<section class="bg-sky" style="min-height:88vh; display:grid; align-content:start; justify-items:center; text-align:center">
+  <div class="bg-sky__clouds bg-sky__clouds--back" aria-hidden="true"></div>
+  <div class="bg-sky__clouds" aria-hidden="true"></div>
+  <div class="bg-sky__photo" aria-hidden="true"></div>
+  <div class="container" style="color:#fff; padding-block: clamp(var(--s-7), 9vh, var(--s-9)) var(--s-9)">
+    <span class="eyebrow" style="color:rgba(255,255,255,.85)">06 — Живой фон · rep4</span>
+    <h1 class="t-hero" style="margin-block:var(--s-5)">Heavenly<br>Comfort</h1>
+    <p class="t-body-lg center" style="max-width:44ch;color:rgba(255,255,255,.92)">
+      Градиент неба, два CSS-слоя облаков и кадр из rep4 движутся с разной скоростью
+      (40s / 88s / 64s). При <code>prefers-reduced-motion</code> движение выключается.
+    </p>
+  </div>
+</section>
+
+<!-- ================= ТЁМНАЯ СЕКЦИЯ (rep5) ============= -->
+<footer class="section section--dark">
+  <div class="container g-6-6">
+    <div>
+      <span class="eyebrow">Design system</span>
+      <h2 style="margin-top:var(--s-3)">Olga</h2>
+    </div>
+    <div class="stack">
+      <p class="t-muted">Токены: <code>tokens.css</code> / <code>tokens.json</code>.
+        База: <code>base.css</code>. Компоненты: <code>components.css</code>.
+        Правила и разбор референсов: <code>README.md</code>.</p>
+      <div class="cluster"><button class="btn btn--ghost" style="color:var(--c-ivory);border-color:rgba(246,243,239,.35)">README</button></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
