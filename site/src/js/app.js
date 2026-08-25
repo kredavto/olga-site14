@@ -41,8 +41,15 @@
 
   /* ---------------------------------------------------------- reveal */
   const io = new IntersectionObserver(es => {
-    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
-  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+    // Соседи, входящие в кадр одновременно, появляются лесенкой, а не разом
+    const hits = es.filter(e => e.isIntersecting).sort((a, b) =>
+      a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left);
+    hits.forEach((e, i) => {
+      e.target.style.setProperty('--rd', (Math.min(i, 6) * 90) + 'ms');
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.06 });
   $$('.reveal, .clip-reveal, .split-line, .wordmark, .cat').forEach(el => io.observe(el));
 
   /* ---------------------------------------------------------- header */
@@ -237,6 +244,23 @@
     onScroll(scene);
   }
 
+  /* ---------------------------------------------------------- 03 КАТАЛОГ: проход сквозь пространства */
+  const cats = $$('.cat');
+  if (cats.length && !REDUCED) {
+    onScroll(() => {
+      for (const cat of cats) {
+        const r = cat.getBoundingClientRect();
+        if (r.bottom < -100 || r.top > window.innerHeight + 100) continue;
+        // -0.5 сверху экрана, +0.5 снизу: кадр «проезжает» медленнее секции
+        const p = (r.top + r.height / 2 - window.innerHeight / 2) / (window.innerHeight + r.height);
+        const img = $('.cat__media img', cat);
+        if (img) img.style.transform = `translate3d(0, ${(p * 130).toFixed(1)}px, 0) scale(${(1.20 - Math.abs(p) * 0.06).toFixed(3)})`;
+        const title = $('.cat__title', cat);
+        if (title) title.style.transform = `translate3d(0, ${(p * -46).toFixed(1)}px, 0)`;
+      }
+    });
+  }
+
   /* ---------------------------------------------------------- 04 ПРОЕКТЫ: parallax + фильтр */
   const gallery = $('.gallery');
   if (gallery) {
@@ -248,7 +272,7 @@
           if (r.bottom < -200 || r.top > window.innerHeight + 200) continue;
           const p = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
           const depth = +img.dataset.depth || 1;
-          img.style.transform = `translate3d(0, ${(-p * 34 * depth).toFixed(2)}px, 0) scale(1.12)`;
+          img.style.transform = `translate3d(0, ${(-p * 96 * depth).toFixed(2)}px, 0) scale(1.22)`;
         }
       });
     }

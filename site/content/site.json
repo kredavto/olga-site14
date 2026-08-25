@@ -64,7 +64,7 @@
     "videoMobile": null,
     "frames": {
       "pattern": "media/hero-{i}.jpg",
-      "count": 16,
+      "count": 40,
       "pad": 2
     },
     "annotations": [

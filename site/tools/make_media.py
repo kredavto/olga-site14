@@ -316,8 +316,116 @@ def _v_wardrobe(w, h, t, warmth, seed, accent, r):
     return img
 
 
+def _v_dolly(w, h, t, warmth, seed, accent, r):
+    """
+    Непрерывный пролёт камеры по одному помещению.
+
+    Кадр строится настоящей перспективой: панель на мировой глубине z
+    проецируется как k = (z - a) / ((z - a) + f), где a — то, насколько
+    камера уехала вперёд. Поэтому соседние кадры отличаются чуть-чуть,
+    и последовательность читается как движение, а не как смена сцен.
+    """
+    F = 5.0                      # фокусное расстояние сцены
+    ADVANCE = 9.0                # на сколько «метров» уезжает камера за весь скролл
+    a = t * ADVANCE
+    vx, vy = w * (0.50 + 0.04 * math.sin(t * 1.6)), h * 0.555
+
+    def k_of(z):
+        d = z - a
+        return None if d < 0.12 else d / (d + F)
+
+    def P(near, k):
+        return (near[0] + (vx - near[0]) * k, near[1] + (vy - near[1]) * k)
+
+    # опорные точки кадра: края стен и пола на нулевой глубине
+    L_TOP, L_BOT = (-w * 0.10, -h * 0.12), (-w * 0.10, h * 1.12)
+    R_TOP, R_BOT = (w * 1.10, -h * 0.12), (w * 1.10, h * 1.12)
+    CEIL_L, CEIL_R = (-w * 0.10, -h * 0.12), (w * 1.10, -h * 0.12)
+
+    img = _base(w, h, warmth, 0.42, 1.05)
+
+    # ---------- пол: уходит к точке схода ----------
+    zs = [i * 0.75 for i in range(0, 46)]
+    ks = [(z, k_of(z)) for z in zs]
+    ks = [(z, k) for z, k in ks if k is not None]
+    if len(ks) > 1:
+        k0, k1 = ks[0][1], ks[-1][1]
+        floor = _mask(w, h, lambda d: d.polygon(
+            [P(L_BOT, k0), P(R_BOT, k0), P(R_BOT, k1), P(L_BOT, k1)], fill=255), blur=1.0)
+        img = img * (1 - floor[:, :, None] * 0.62) + floor[:, :, None] * GRAPHITE * 0.9
+        # потолок
+        ceil = _mask(w, h, lambda d: d.polygon(
+            [P(CEIL_L, k0), P(CEIL_R, k0), P(CEIL_R, k1), P(CEIL_L, k1)], fill=255), blur=1.0)
+        img = img * (1 - ceil[:, :, None] * 0.55)
+
+    # ---------- левая стена: ритм окон, источник света ----------
+    for i in range(len(ks) - 1):
+        (z0, ka), (z1, kb) = ks[i], ks[i + 1]
+        if int(z0 / 0.75) % 3:                     # окно через каждые три шага
+            continue
+        quad = [P(L_TOP, ka), P(L_TOP, kb), P(L_BOT, kb), P(L_BOT, ka)]
+        # проём: вертикально от 12% до 68% высоты стены
+        def lerp2(p, q, f): return (p[0] + (q[0] - p[0]) * f, p[1] + (q[1] - p[1]) * f)
+        win = [lerp2(quad[0], quad[3], 0.12), lerp2(quad[1], quad[2], 0.12),
+               lerp2(quad[1], quad[2], 0.70), lerp2(quad[0], quad[3], 0.70)]
+        depth_fade = max(0.0, 1.0 - ka * 1.15)
+        halo = _mask(w, h, lambda d: d.polygon(win, fill=255), blur=w * 0.045)
+        img += halo[:, :, None] * (MILK * 0.30 + BRONZE * 0.08 * warmth) * depth_fade
+        m = _mask(w, h, lambda d: d.polygon(win, fill=255), blur=1.0)
+        img = img * (1 - m[:, :, None] * 0.92) + m[:, :, None] * 0.92 * \
+            (MILK * (0.46 + 0.10 * warmth)) * (0.45 + 0.55 * depth_fade)
+        # световое пятно на полу напротив окна
+        pool = _mask(w, h, lambda d: d.polygon(
+            [P(L_BOT, ka), P(L_BOT, kb),
+             lerp2(P(L_BOT, kb), P(R_BOT, kb), 0.55), lerp2(P(L_BOT, ka), P(R_BOT, ka), 0.55)],
+            fill=255), blur=w * 0.03)
+        img += pool[:, :, None] * (MILK * 0.15 + BRONZE * 0.04) * depth_fade
+
+    # ---------- правая стена: ряд фасадов со световой линией ----------
+    def lerp2(p, q, f): return (p[0] + (q[0] - p[0]) * f, p[1] + (q[1] - p[1]) * f)
+    for i in range(len(ks) - 1):
+        (z0, ka), (z1, kb) = ks[i], ks[i + 1]
+        quad = [P(R_TOP, ka), P(R_TOP, kb), P(R_BOT, kb), P(R_BOT, ka)]
+        lit = 0.42 + 0.75 * max(0.0, 1.0 - ka * 1.25) * (0.85 + 0.3 * ((i * 37) % 100) / 100)
+        face = _mask(w, h, lambda d: d.polygon(quad, fill=255), blur=0.6)
+        img = img * (1 - face[:, :, None] * 0.90) + face[:, :, None] * 0.90 * \
+            (GRAPHITE * 2.5 + BRONZE * 0.07 * warmth) * lit
+        seam = _mask(w, h, lambda d: d.line([P(R_TOP, kb), P(R_BOT, kb)], fill=255, width=2), blur=0.8)
+        img += seam[:, :, None] * MILK * 0.12 * max(0.0, 1.0 - ka * 1.3)
+
+    # ---------- подсветка под верхним ярусом: одна непрерывная линия ----------
+    if len(ks) > 1:
+        top_a = lerp2(P(R_TOP, ks[0][1]), P(R_BOT, ks[0][1]), 0.52)
+        top_b = lerp2(P(R_TOP, ks[-1][1]), P(R_BOT, ks[-1][1]), 0.52)
+        led = _mask(w, h, lambda d: d.line([top_a, top_b], fill=255, width=3), blur=2.6)
+        img += led[:, :, None] * BRONZE * (0.75 + 0.9 * accent)
+        glow = _mask(w, h, lambda d: d.line([top_a, top_b], fill=255, width=int(h * 0.055)),
+                     blur=h * 0.035)
+        img += glow[:, :, None] * BRONZE * (0.16 + 0.5 * accent)
+        shelf = _mask(w, h, lambda d: d.polygon(
+            [lerp2(P(R_TOP, ks[0][1]), P(R_BOT, ks[0][1]), 0.52),
+             lerp2(P(R_TOP, ks[-1][1]), P(R_BOT, ks[-1][1]), 0.52),
+             lerp2(P(R_TOP, ks[-1][1]), P(R_BOT, ks[-1][1]), 0.575),
+             lerp2(P(R_TOP, ks[0][1]), P(R_BOT, ks[0][1]), 0.60)], fill=255), blur=0.9)
+        img += shelf[:, :, None] * MILK * 0.16
+
+    # ---------- подвесы над проходом ----------
+    for j in range(1, 9):
+        k = k_of(j * 2.4)
+        if k is None or k > 0.86:
+            continue
+        cx = lerp2(P(L_TOP, k), P(R_TOP, k), 0.42)
+        drop = h * 0.20 * (1 - k)
+        bulb = _mask(w, h, lambda d: d.ellipse(
+            [cx[0] - w * .045 * (1 - k), cx[1] + drop - h * .03 * (1 - k),
+             cx[0] + w * .045 * (1 - k), cx[1] + drop + h * .07 * (1 - k)], fill=255), blur=w * 0.022)
+        img += bulb[:, :, None] * (BRONZE * 0.55 + MILK * 0.20) * warmth * max(0.0, 1 - k * 1.1)
+
+    return img
+
+
 VARIANTS = {"perspective": _v_perspective, "elevation": _v_elevation, "detail": _v_detail,
-            "openspace": _v_openspace, "wardrobe": _v_wardrobe}
+            "openspace": _v_openspace, "wardrobe": _v_wardrobe, "dolly": _v_dolly}
 
 
 def interior(w, h, t=0.0, warmth=1.0, seed=1, shaft=0.34, accent=0.0,
@@ -419,23 +527,16 @@ def glow_detail(w, h, seed=17):
 def main():
     made = []
 
-    # HERO: непрерывный пролёт камеры — гостиная → кухня → гардеробная → деталь фасада.
-    # Кадры скрабятся скроллом; при подключении реального видео слот заменяется целиком.
-    FRAMES = 16
-    legs = [(0.00, 0.34, "openspace",   105, 1.00),
-            (0.34, 0.62, "perspective", 112, 1.20),
-            (0.62, 0.84, "wardrobe",    121, 1.05),
-            (0.84, 1.01, "detail",      134, 1.35)]
+    # HERO: один непрерывный пролёт камеры по помещению.
+    # Кадры отличаются друг от друга минимально — при скрабе это читается
+    # как движение камеры, а не как перелистывание разных снимков.
+    FRAMES = 40
     for i in range(FRAMES):
         t = i / (FRAMES - 1)
-        for a, b, var, sd, wm in legs:
-            if a <= t < b:
-                k = (t - a) / (b - a)
-                made.append(save(interior(1280, 720, t=k, warmth=wm, seed=sd, variant=var,
-                                          shaft=0.26 + 0.20 * k, accent=0.10 + 0.25 * k,
-                                          exposure=0.95 + 0.25 * k, zoom=1.0 + 0.14 * k),
-                                 f"hero-{i:02d}.jpg", quality=72))
-                break
+        made.append(save(interior(1152, 648, t=t, warmth=1.05 + 0.35 * t, seed=101,
+                                  variant="dolly", shaft=0.30 + 0.14 * t,
+                                  accent=0.10 + 0.40 * t, exposure=0.92 + 0.30 * t),
+                         f"hero-{i:02d}.jpg", quality=70))
 
     # КАТАЛОГ: четыре разных пространства — четыре разных типа кадра
     for name, var, sd, wm, ac in [("kitchen", "perspective", 211, 1.20, 0.16),
