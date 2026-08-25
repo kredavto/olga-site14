@@ -125,6 +125,54 @@ tall 900×1350 / detail 900×900, case и CTA 1920×1080).
 Unsplash, Pexels или ваш собственный CDN. Параметры Unsplash (`w`, `h`,
 `crop`, `q`) позволяют получить нужное кадрирование без графического редактора.
 
+## Слоты под фотографии
+
+Заполняется вставкой ссылки в `content/site.json` по указанному пути, затем `npm run build`.
+Локальный кадр из соседнего поля `fallback` остаётся страховкой — трогать его не нужно.
+
+| Путь в `site.json` | Что это на сайте | Запрос для поиска | Размер |
+|---|---|---|---|
+| `catalog.items[0].image` | Каталог — Кухни | `modern dark kitchen interior` | 1400×1000 |
+| `catalog.items[1].image` | Каталог — Шкафы-купе | `sliding wardrobe interior` | 1400×1000 |
+| `catalog.items[2].image` | Каталог — Гардеробные | `walk-in closet interior` | 1400×1000 |
+| `catalog.items[3].image` | Каталог — Гостиные | `modern living room interior` | 1400×1000 |
+| `projects.items[0].images[0].src` | Проект 1 — общий план | `luxury apartment interior` | 1600×1000 |
+| `projects.items[0].images[1].src` | Проект 1 — вертикальный | `luxury apartment interior vertical` | 900×1350 |
+| `projects.items[0].images[2].src` | Проект 1 — деталь | `furniture detail macro` | 900×900 |
+| `projects.items[1].images[0].src` | Проект 2 — общий план | `minimal interior kitchen` | 1600×1000 |
+| `projects.items[1].images[1].src` | Проект 2 — вертикальный | `minimal interior kitchen vertical` | 900×1350 |
+| `projects.items[1].images[2].src` | Проект 2 — деталь | `furniture detail macro` | 900×900 |
+| `projects.items[2].images[0].src` | Проект 3 — общий план | `contemporary living room` | 1600×1000 |
+| `projects.items[2].images[1].src` | Проект 3 — вертикальный | `contemporary living room vertical` | 900×1350 |
+| `projects.items[2].images[2].src` | Проект 3 — деталь | `furniture detail macro` | 900×900 |
+| `projects.items[3].images[0].src` | Проект 4 — общий план | `japandi interior` | 1600×1000 |
+| `projects.items[3].images[1].src` | Проект 4 — вертикальный | `japandi interior vertical` | 900×1350 |
+| `projects.items[3].images[2].src` | Проект 4 — деталь | `furniture detail macro` | 900×900 |
+| `details.image` | Мебель в деталях (кухня, хотспоты) | `kitchen cabinets close up` | 1800×1150 |
+| `production.steps[0].image` | Производство 1 — Материал | `wood veneer texture` | 1500×1000 |
+| `production.steps[1].image` | Производство 2 — Раскрой | `cnc woodworking` | 1500×1000 |
+| `production.steps[2].image` | Производство 3 — Обработка | `furniture workshop sanding` | 1500×1000 |
+| `production.steps[3].image` | Производство 4 — Сборка | `furniture assembly workshop` | 1500×1000 |
+| `production.steps[4].image` | Производство 5 — Контроль | `carpenter measuring` | 1500×1000 |
+| `production.steps[5].image` | Производство 6 — Монтаж | `furniture installation` | 1500×1000 |
+| `testimonials[0].image` | Отзыв 1 — интерьер клиента | `cozy modern interior` | 1500×1100 |
+| `testimonials[1].image` | Отзыв 2 — интерьер клиента | `cozy modern interior` | 1500×1100 |
+| `testimonials[2].image` | Отзыв 3 — интерьер клиента | `cozy modern interior` | 1500×1100 |
+| `materials.items[0].image` | Материал — Натуральный шпон | `wood veneer macro` | см. мозаику |
+| `materials.items[1].image` | Материал — Premium matt | `matte surface texture` | см. мозаику |
+| `materials.items[2].image` | Материал — Камень | `stone countertop macro` | см. мозаику |
+| `materials.items[3].image` | Материал — Металл | `brushed brass texture` | см. мозаику |
+| `materials.items[4].image` | Материал — Hidden hardware | `cabinet hinge close up` | см. мозаику |
+| `materials.items[5].image` | Материал — Массив дуба | `oak wood grain` | см. мозаику |
+| `materials.items[6].image` | Материал — Мрамор | `marble texture` | см. мозаику |
+| `materials.items[7].image` | Материал — Текстиль | `fabric texture macro` | см. мозаику |
+
+Подойдёт любая прямая ссылка на изображение. Для Unsplash достаточно взять адрес
+вида `https://images.unsplash.com/photo-…` и добавить `?auto=format&fit=crop&w=…&h=…&q=78`.
+
+**Перед вставкой посмотрите на сам снимок.** Живой адрес не гарантирует, что на нём
+нужный сюжет — так на сайт уже попадали кадр из ресторана и особняк у воды.
+
 ### Hero: видео, управляемое скроллом
 Сейчас hero скрабит **последовательность кадров** на `<canvas>` —
 механика та же, что с видео, и работает без видеофайла.
