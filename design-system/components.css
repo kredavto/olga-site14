@@ -1,0 +1,147 @@
+/* Design System «Olga» — компоненты */
+
+/* ---------- Кнопки (rep1, rep2, rep3) ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  padding: 14px 28px;
+  border: 1px solid transparent; border-radius: var(--r-pill);
+  font-family: var(--font-ui); font-size: var(--t-caption); font-weight: var(--fw-med);
+  text-transform: uppercase; letter-spacing: var(--ls-label);
+  cursor: pointer;
+  transition: background var(--d-base) var(--ease), color var(--d-base) var(--ease),
+              transform var(--d-fast) var(--ease), border-color var(--d-base) var(--ease);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn--dark  { background: var(--c-espresso); color: var(--c-ivory); }
+.btn--dark:hover { background: var(--c-ink); }
+.btn--ghost { background: transparent; color: var(--fg); border-color: var(--border); }
+.btn--ghost:hover { border-color: var(--c-espresso); }
+.btn--accent { background: var(--accent); color: var(--c-ivory); }
+.btn--accent:hover { background: var(--c-terracotta); }
+.btn--on-photo { background: transparent; color: #fff; border-color: rgba(255,255,255,.7); }
+.btn--on-photo:hover { background: rgba(255,255,255,.14); border-color: #fff; }
+
+/* ---------- Бейдж / цена (rep2, rep5) ---------- */
+.badge {
+  display: inline-flex; align-items: center; gap: var(--s-1);
+  padding: 6px 12px; border-radius: var(--r-pill);
+  background: var(--c-espresso); color: var(--c-ivory);
+  font-size: var(--t-label); font-weight: var(--fw-med); letter-spacing: .04em;
+}
+.badge--accent { background: var(--accent); }
+.price { font-family: var(--font-ui); font-size: var(--t-caption); letter-spacing: .06em; color: var(--fg-muted); }
+.price strong { color: var(--fg); font-weight: var(--fw-med); }
+
+/* ---------- Промо-полоса (rep1) ---------- */
+.marquee {
+  display: flex; align-items: center; gap: var(--s-6);
+  height: 48px; overflow: hidden;
+  border-block: 1px solid var(--border);
+  font-size: var(--t-caption); color: var(--fg-muted);
+}
+.marquee__track { display: flex; gap: var(--s-6); white-space: nowrap; animation: marquee var(--d-amb) linear infinite; }
+.marquee__sep { color: var(--c-clay); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- Карточка товара (rep2 + rep1) ---------- */
+.card {
+  display: flex; flex-direction: column; gap: var(--s-4);
+  padding: var(--s-4);
+  background: var(--bg-alt); border-radius: var(--r-lg);
+  box-shadow: var(--sh-card);
+  transition: box-shadow var(--d-base) var(--ease), transform var(--d-base) var(--ease);
+}
+.card:hover { box-shadow: var(--sh-lift); transform: translateY(-4px); }
+.card__media { position: relative; aspect-ratio: 4 / 5; border-radius: var(--r-md); overflow: hidden; background: var(--c-clay); }
+.card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--d-slow) var(--ease); }
+.card:hover .card__media img { transform: scale(1.04); }
+.card__media .badge { position: absolute; top: var(--s-3); left: var(--s-3); }
+.card__body { display: flex; flex-direction: column; gap: var(--s-1); }
+
+/* ---------- Горизонтальная лента карточек (rep1) ---------- */
+.rail {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(240px, 1fr);
+  gap: var(--gutter);
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  padding-bottom: var(--s-3);
+  scrollbar-width: thin;
+}
+.rail > * { scroll-snap-align: start; }
+
+/* ---------- Фото-арка (rep5) ---------- */
+.arch { width: 100%; flex: 0 0 auto; border-radius: var(--r-arch); overflow: hidden; aspect-ratio: 3 / 4; background: var(--c-clay); }
+.arch img { width: 100%; height: 100%; object-fit: cover; }
+.arch-item { display: flex; flex-direction: column; gap: var(--s-4); text-align: center; min-width: 0; }
+.arch-item > * { flex: 0 0 auto; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; isolation: isolate;
+  min-height: 88vh;
+  display: grid; align-content: start; justify-items: center;
+  padding-block: clamp(var(--s-9), 18vh, var(--s-11)) var(--s-9);
+  text-align: center; overflow: hidden;
+}
+/* навигация лежит поверх героя, не участвуя в его вертикальном ритме */
+.hero__nav { position: absolute; inset: 0 0 auto 0; z-index: var(--z-header); }
+.hero__media { position: absolute; inset: 0; z-index: -2; }
+.hero__media img { width: 100%; height: 100%; object-fit: cover; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(31,26,24,.46) 0%, rgba(31,26,24,.18) 42%, rgba(31,26,24,.34) 100%); }
+.hero__inner { display: flex; flex-direction: column; align-items: center; gap: var(--s-5);
+  width: 100%; max-width: 46rem; padding-inline: var(--pad-x); }
+.hero__inner .t-hero, .hero__inner h1 { max-width: 14ch; text-wrap: balance; }
+.hero__sub { max-width: 46ch; }
+.hero--dark { background: var(--c-espresso); color: var(--fg-on-dark); }
+.hero--photo { color: #fff; }
+.hero--photo .eyebrow { color: rgba(255,255,255,.82); }
+
+/* ---------- Анимируемый фон «небо» (rep4) ---------- */
+.bg-sky { position: relative; isolation: isolate; overflow: hidden;
+  background: linear-gradient(180deg, var(--c-sky-4) 0%, var(--c-sky-3) 28%, var(--c-sky-2) 58%, var(--c-sky-1) 100%); }
+.bg-sky__clouds {
+  position: absolute; inset: auto 0 0 0; height: 30%; z-index: -1;
+  background-repeat: repeat-x; background-size: 50% 100%; background-position: 0 100%;
+  background-image:
+    radial-gradient(38% 46% at 12% 88%, #fff 0 58%, rgba(255,255,255,0) 72%),
+    radial-gradient(30% 40% at 30% 96%, #fff 0 60%, rgba(255,255,255,0) 74%),
+    radial-gradient(44% 52% at 52% 92%, #fff 0 56%, rgba(255,255,255,0) 72%),
+    radial-gradient(28% 38% at 72% 98%, #fff 0 60%, rgba(255,255,255,0) 74%),
+    radial-gradient(40% 48% at 90% 90%, #fff 0 58%, rgba(255,255,255,0) 72%),
+    linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 64%, rgba(255,255,255,.92) 100%);
+  animation: drift var(--d-amb) linear infinite;
+}
+.bg-sky__clouds--back {
+  height: 50%; opacity: .55; filter: blur(3px);
+  background-size: 72% 100%;
+  animation-duration: calc(var(--d-amb) * 2.2); animation-direction: reverse;
+}
+@keyframes drift { to { background-position: 100% 100%; } }
+
+/* Фотослой облаков (кадр из rep4): широкий, поэтому качается без стыков */
+.bg-sky__photo {
+  position: absolute; inset: auto -12% -2% -12%; height: 44%; z-index: -1;
+  background: url("references/sky-clouds.jpg") center bottom / cover no-repeat;
+  mix-blend-mode: screen; opacity: .95;
+  animation: sway calc(var(--d-amb) * 1.6) ease-in-out infinite alternate;
+}
+.bg-sky__photo::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(105,160,212,.9) 0%, rgba(105,160,212,0) 38%);
+}
+@keyframes sway { from { transform: translate3d(0,0,0) scale(1.02); } to { transform: translate3d(4%,-1.5%,0) scale(1.06); } }
+@media (prefers-reduced-motion: reduce) { .bg-sky__clouds, .bg-sky__photo, .marquee__track { animation: none; } }
+
+/* ---------- Навигация ---------- */
+.nav { display: flex; align-items: center; justify-content: space-between; gap: var(--s-6); height: 64px; }
+.nav__links { display: none; gap: var(--s-6); }
+.nav__logo { font-family: var(--font-display); font-size: 1.125rem; letter-spacing: .18em; text-transform: uppercase; }
+@media (min-width: 768px) { .nav__links { display: flex; } }
+
+/* ---------- Свотчи (для превью системы) ---------- */
+.swatches { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.swatch { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--border); background: #fff; }
+.swatch__chip { height: 84px; }
+.swatch__meta { padding: var(--s-3); display: flex; flex-direction: column; gap: 2px; }
+
+.hero__inner .cluster { justify-content: center; }

@@ -1,0 +1,876 @@
+{
+  "meta": {
+    "brand": "OLGA",
+    "brandLine": "furniture atelier",
+    "title": "OLGA — мебель по индивидуальному проекту",
+    "description": "Цифровой интерьерный showroom: кухни, гардеробные, шкафы и гостиные по индивидуальному проекту. Собственное производство, премиальные материалы, монтаж под ключ.",
+    "url": "https://example.com",
+    "og": "media/og.jpg",
+    "locale": "ru_RU"
+  },
+  "contacts": {
+    "phone": "+7 495 000-00-00",
+    "phoneHref": "tel:+74950000000",
+    "whatsapp": "https://wa.me/74950000000",
+    "telegram": "https://t.me/olga_atelier",
+    "email": "studio@example.com",
+    "showroom": "Москва, Кутузовский проспект, 12, шоурум",
+    "production": "Московская область, Химки, производственный комплекс",
+    "hours": "Пн–Сб 10:00–20:00 · Вс по записи",
+    "mapCenter": {
+      "lat": 55.7423,
+      "lng": 37.5344
+    }
+  },
+  "nav": [
+    {
+      "label": "Каталог",
+      "href": "#catalog"
+    },
+    {
+      "label": "Проекты",
+      "href": "#projects"
+    },
+    {
+      "label": "Материалы",
+      "href": "#materials"
+    },
+    {
+      "label": "Как работаем",
+      "href": "#process"
+    },
+    {
+      "label": "О компании",
+      "href": "#production"
+    }
+  ],
+  "hero": {
+    "eyebrow": "Мебель по индивидуальному проекту",
+    "title": [
+      "Мебель, созданная",
+      "под ваше пространство."
+    ],
+    "subtitle": "От идеи и замера до установки — один проект, один результат.",
+    "cta": {
+      "label": "Рассчитать стоимость",
+      "href": "#calculator"
+    },
+    "secondary": {
+      "label": "Смотреть проекты",
+      "href": "#projects"
+    },
+    "scrollHint": "Scroll to explore",
+    "video": null,
+    "videoMobile": null,
+    "frames": {
+      "pattern": "media/hero-{i}.jpg",
+      "count": 16,
+      "pad": 2
+    },
+    "annotations": [
+      {
+        "at": 0.16,
+        "label": "Натуральный шпон",
+        "x": 26,
+        "y": 62,
+        "tx": 8,
+        "ty": 34
+      },
+      {
+        "at": 0.34,
+        "label": "Скрытая фурнитура",
+        "x": 70,
+        "y": 46,
+        "tx": 84,
+        "ty": 22
+      },
+      {
+        "at": 0.52,
+        "label": "Фасады в эмали",
+        "x": 40,
+        "y": 52,
+        "tx": 14,
+        "ty": 26
+      },
+      {
+        "at": 0.7,
+        "label": "Индивидуальная геометрия",
+        "x": 62,
+        "y": 66,
+        "tx": 78,
+        "ty": 78
+      },
+      {
+        "at": 0.86,
+        "label": "Встроенная подсветка",
+        "x": 46,
+        "y": 44,
+        "tx": 22,
+        "ty": 74
+      }
+    ]
+  },
+  "usp": {
+    "statement": [
+      "Не подгоняем мебель под пространство.",
+      "Создаём мебель вместе с пространством."
+    ],
+    "items": [
+      {
+        "n": "01",
+        "title": "Индивидуальный проект",
+        "text": "Проектируем от архитектуры помещения, а не от готовых модулей.",
+        "image": "media/proj-p01-wide.jpg"
+      },
+      {
+        "n": "02",
+        "title": "Премиальные материалы",
+        "text": "Шпон, камень, эмаль и фурнитура европейских фабрик.",
+        "image": "media/mat-veneer.jpg"
+      },
+      {
+        "n": "03",
+        "title": "Собственное производство",
+        "text": "Полный цикл в одном цехе — от раскроя до контроля качества.",
+        "image": "media/prod-03-finishing.jpg"
+      },
+      {
+        "n": "04",
+        "title": "Монтаж под ключ",
+        "text": "Одна бригада, один срок, одна зона ответственности.",
+        "image": "media/prod-06-install.jpg"
+      }
+    ]
+  },
+  "catalog": {
+    "title": [
+      "Создаём мебель",
+      "для пространства целиком."
+    ],
+    "hint": "Смотреть проекты",
+    "items": [
+      {
+        "n": "01",
+        "title": "Кухни",
+        "image": "media/cat-kitchen.jpg",
+        "meta": "от 480 000 ₽ · 28 дней",
+        "href": "#projects"
+      },
+      {
+        "n": "02",
+        "title": "Шкафы-купе",
+        "image": "media/cat-wardrobe-sliding.jpg",
+        "meta": "от 180 000 ₽ · 21 день",
+        "href": "#projects"
+      },
+      {
+        "n": "03",
+        "title": "Гардеробные",
+        "image": "media/cat-dressing.jpg",
+        "meta": "от 320 000 ₽ · 24 дня",
+        "href": "#projects"
+      },
+      {
+        "n": "04",
+        "title": "Гостиные",
+        "image": "media/cat-living.jpg",
+        "meta": "от 260 000 ₽ · 26 дней",
+        "href": "#projects"
+      }
+    ]
+  },
+  "projects": {
+    "title": [
+      "Проекты, которые",
+      "хочется рассматривать."
+    ],
+    "filters": {
+      "style": {
+        "label": "Стиль",
+        "options": [
+          "Все",
+          "Modern",
+          "Minimal",
+          "Contemporary",
+          "Neoclassic",
+          "Japandi"
+        ]
+      },
+      "budget": {
+        "label": "Бюджет",
+        "options": [
+          "Все",
+          "до 500 тыс.",
+          "500 тыс. — 1 млн",
+          "1—2 млн",
+          "2 млн+"
+        ]
+      },
+      "type": {
+        "label": "Тип",
+        "options": [
+          "Все",
+          "Кухня",
+          "Гардеробная",
+          "Гостиная",
+          "Шкафы"
+        ]
+      }
+    },
+    "items": [
+      {
+        "id": "p01",
+        "title": "Резиденция в Хамовниках",
+        "meta": "128 м² · кухня + гостиная",
+        "style": "Modern",
+        "budget": "1—2 млн",
+        "type": "Кухня",
+        "images": [
+          {
+            "src": "media/proj-p01-wide.jpg",
+            "role": "wide",
+            "alt": "Кухня-гостиная, общий план"
+          },
+          {
+            "src": "media/proj-p01-tall.jpg",
+            "role": "tall",
+            "alt": "Гардеробная, вертикальный кадр"
+          },
+          {
+            "src": "media/proj-p01-detail.jpg",
+            "role": "detail",
+            "alt": "Кромка фасада, макро"
+          }
+        ]
+      },
+      {
+        "id": "p02",
+        "title": "Квартира на Мосфильмовской",
+        "meta": "96 м² · гардеробная + шкафы",
+        "style": "Minimal",
+        "budget": "500 тыс. — 1 млн",
+        "type": "Гардеробная",
+        "images": [
+          {
+            "src": "media/proj-p02-wide.jpg",
+            "role": "wide",
+            "alt": "Кухня вдоль окна"
+          },
+          {
+            "src": "media/proj-p02-tall.jpg",
+            "role": "tall",
+            "alt": "Стена фасадов"
+          },
+          {
+            "src": "media/proj-p02-detail.jpg",
+            "role": "detail",
+            "alt": "Профиль-ручка, макро"
+          }
+        ]
+      },
+      {
+        "id": "p03",
+        "title": "Дом в Барвихе",
+        "meta": "240 м² · полный комплект",
+        "style": "Contemporary",
+        "budget": "2 млн+",
+        "type": "Гостиная",
+        "images": [
+          {
+            "src": "media/proj-p03-pano.jpg",
+            "role": "pano",
+            "alt": "Панорама гостиной"
+          },
+          {
+            "src": "media/proj-p03-tall.jpg",
+            "role": "tall",
+            "alt": "Гардеробная с подсветкой"
+          },
+          {
+            "src": "media/proj-p03-detail.jpg",
+            "role": "detail",
+            "alt": "Стык материалов"
+          }
+        ]
+      },
+      {
+        "id": "p04",
+        "title": "Апартаменты в Сити",
+        "meta": "74 м² · кухня + хранение",
+        "style": "Japandi",
+        "budget": "до 500 тыс.",
+        "type": "Шкафы",
+        "images": [
+          {
+            "src": "media/proj-p04-wide.jpg",
+            "role": "wide",
+            "alt": "Фронтальная стена хранения"
+          },
+          {
+            "src": "media/proj-p04-tall.jpg",
+            "role": "tall",
+            "alt": "Общий план"
+          },
+          {
+            "src": "media/proj-p04-detail.jpg",
+            "role": "detail",
+            "alt": "Подсветка полки, макро"
+          }
+        ]
+      }
+    ]
+  },
+  "caseStudy": {
+    "kicker": "Проект №01",
+    "image": "media/case-01.jpg",
+    "title": "Квартира 128 м²",
+    "scope": "Кухня + гостиная + гардеробная",
+    "facts": [
+      {
+        "label": "Стоимость",
+        "value": 1480000,
+        "prefix": "от ",
+        "suffix": " ₽"
+      },
+      {
+        "label": "Площадь",
+        "value": 128,
+        "suffix": " м²"
+      },
+      {
+        "label": "Срок",
+        "value": 32,
+        "suffix": " дня"
+      },
+      {
+        "label": "Модулей",
+        "value": 46,
+        "suffix": " шт"
+      }
+    ],
+    "materials": [
+      "шпон",
+      "эмаль",
+      "камень",
+      "премиальная фурнитура"
+    ]
+  },
+  "calculator": {
+    "title": "Сколько будет стоить ваша мебель?",
+    "note": "Предварительный расчёт. Точная стоимость — после замера.",
+    "currency": "₽",
+    "steps": [
+      {
+        "id": "kind",
+        "label": "Что создаём?",
+        "type": "choice",
+        "options": [
+          {
+            "id": "kitchen",
+            "label": "Кухня",
+            "base": 480000,
+            "rate": 78000
+          },
+          {
+            "id": "cabinet",
+            "label": "Шкаф",
+            "base": 180000,
+            "rate": 42000
+          },
+          {
+            "id": "dressing",
+            "label": "Гардеробная",
+            "base": 320000,
+            "rate": 56000
+          },
+          {
+            "id": "living",
+            "label": "Гостиная",
+            "base": 260000,
+            "rate": 48000
+          }
+        ]
+      },
+      {
+        "id": "size",
+        "label": "Размеры",
+        "type": "dimensions",
+        "fields": [
+          {
+            "id": "length",
+            "label": "Длина",
+            "unit": "м",
+            "min": 1,
+            "max": 12,
+            "step": 0.1,
+            "value": 3.6
+          },
+          {
+            "id": "height",
+            "label": "Высота",
+            "unit": "м",
+            "min": 1,
+            "max": 3.6,
+            "step": 0.1,
+            "value": 2.6
+          },
+          {
+            "id": "depth",
+            "label": "Глубина",
+            "unit": "м",
+            "min": 0.3,
+            "max": 1.2,
+            "step": 0.05,
+            "value": 0.6
+          }
+        ]
+      },
+      {
+        "id": "facade",
+        "label": "Материал фасадов",
+        "type": "choice",
+        "options": [
+          {
+            "id": "enamel",
+            "label": "Эмаль",
+            "k": 1.0
+          },
+          {
+            "id": "veneer",
+            "label": "Шпон",
+            "k": 1.28
+          },
+          {
+            "id": "ldsp",
+            "label": "ЛДСП",
+            "k": 0.72
+          },
+          {
+            "id": "acrylic",
+            "label": "Акрил",
+            "k": 1.12
+          },
+          {
+            "id": "custom",
+            "label": "Другой материал",
+            "k": 1.35
+          }
+        ]
+      },
+      {
+        "id": "hardware",
+        "label": "Фурнитура",
+        "type": "choice",
+        "options": [
+          {
+            "id": "standard",
+            "label": "Standard",
+            "k": 1.0
+          },
+          {
+            "id": "premium",
+            "label": "Premium",
+            "k": 1.18
+          },
+          {
+            "id": "luxury",
+            "label": "Luxury",
+            "k": 1.42
+          }
+        ]
+      }
+    ],
+    "cta": "Получить точный расчёт",
+    "form": {
+      "title": "Точный расчёт проекта",
+      "fields": [
+        {
+          "id": "name",
+          "label": "Имя",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "phone",
+          "label": "Телефон",
+          "type": "tel",
+          "required": true
+        },
+        {
+          "id": "messenger",
+          "label": "Мессенджер",
+          "type": "select",
+          "options": [
+            "WhatsApp",
+            "Telegram",
+            "Звонок"
+          ]
+        },
+        {
+          "id": "plan",
+          "label": "План помещения или проект",
+          "type": "file",
+          "accept": ".pdf,.jpg,.jpeg,.png,.dwg"
+        }
+      ],
+      "submit": "Отправить",
+      "consent": "Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности."
+    }
+  },
+  "quiz": {
+    "title": "Поможем понять, какой проект подойдёт именно вам.",
+    "questions": [
+      {
+        "id": "what",
+        "label": "Что планируем?",
+        "options": [
+          "Кухня",
+          "Гардеробная",
+          "Шкафы",
+          "Комплект"
+        ]
+      },
+      {
+        "id": "style",
+        "label": "Какой стиль нравится?",
+        "options": [
+          "Modern",
+          "Minimal",
+          "Contemporary",
+          "Japandi"
+        ]
+      },
+      {
+        "id": "budget",
+        "label": "Ориентировочный бюджет?",
+        "options": [
+          "до 500 тыс.",
+          "500 тыс. — 1 млн",
+          "1—2 млн",
+          "2 млн+"
+        ]
+      },
+      {
+        "id": "when",
+        "label": "Когда планируете реализацию?",
+        "options": [
+          "В этом месяце",
+          "1—3 месяца",
+          "3—6 месяцев",
+          "Пока изучаю"
+        ]
+      }
+    ],
+    "resultTitle": "Ваш проект можно предварительно оценить.",
+    "cta": "Получить расчёт"
+  },
+  "materials": {
+    "title": [
+      "Материал решает",
+      "больше, чем форма."
+    ],
+    "items": [
+      {
+        "image": "media/mat-veneer.jpg",
+        "label": "Натуральный шпон",
+        "sub": "Дуб, орех, эвкалипт"
+      },
+      {
+        "image": "media/mat-enamel.jpg",
+        "label": "Premium matt",
+        "sub": "Эмаль 7 слоёв"
+      },
+      {
+        "image": "media/mat-stone.jpg",
+        "label": "Камень",
+        "sub": "Кварц, агломерат"
+      },
+      {
+        "image": "media/mat-metal.jpg",
+        "label": "Металл",
+        "sub": "Латунь, брашированный алюминий"
+      },
+      {
+        "image": "media/mat-hardware.jpg",
+        "label": "Hidden hardware",
+        "sub": "Blum, Hettich, Salice"
+      },
+      {
+        "image": "media/mat-oak.jpg",
+        "label": "Массив дуба",
+        "sub": "Отбор по текстуре"
+      },
+      {
+        "image": "media/mat-marble.jpg",
+        "label": "Мрамор",
+        "sub": "Книжная раскладка"
+      },
+      {
+        "image": "media/mat-textile.jpg",
+        "label": "Текстиль",
+        "sub": "Обивка ниш и фасадов"
+      }
+    ]
+  },
+  "details": {
+    "title": "Мебель в деталях",
+    "image": "media/hotspot-kitchen.jpg",
+    "hotspots": [
+      {
+        "n": "01",
+        "x": 22,
+        "y": 38,
+        "title": "Push-to-open",
+        "text": "Фасады без ручек, открытие нажатием."
+      },
+      {
+        "n": "02",
+        "x": 52,
+        "y": 55,
+        "title": "Встроенная LED-подсветка",
+        "text": "Скрытый профиль, тёплый спектр 2700K."
+      },
+      {
+        "n": "03",
+        "x": 74,
+        "y": 44,
+        "title": "Каменная столешница",
+        "text": "Кварцевый агломерат, кромка 20 мм."
+      },
+      {
+        "n": "04",
+        "x": 38,
+        "y": 72,
+        "title": "Скрытая фурнитура",
+        "text": "Направляющие и петли вне поля зрения."
+      }
+    ]
+  },
+  "production": {
+    "title": [
+      "От материала",
+      "до готового интерьера."
+    ],
+    "steps": [
+      {
+        "n": "01",
+        "title": "Материал",
+        "text": "Отбор плиты и шпона по текстуре.",
+        "image": "media/prod-01-material.jpg"
+      },
+      {
+        "n": "02",
+        "title": "Раскрой",
+        "text": "ЧПУ с точностью 0,1 мм.",
+        "image": "media/prod-02-cutting.jpg"
+      },
+      {
+        "n": "03",
+        "title": "Обработка",
+        "text": "Кромка, шлифовка, покраска в камере.",
+        "image": "media/prod-03-finishing.jpg"
+      },
+      {
+        "n": "04",
+        "title": "Сборка",
+        "text": "Предсборка каждого модуля в цехе.",
+        "image": "media/prod-04-assembly.jpg"
+      },
+      {
+        "n": "05",
+        "title": "Контроль качества",
+        "text": "Проверка геометрии и зазоров.",
+        "image": "media/prod-05-qc.jpg"
+      },
+      {
+        "n": "06",
+        "title": "Монтаж",
+        "text": "Одна бригада, чистая сдача объекта.",
+        "image": "media/prod-06-install.jpg"
+      }
+    ]
+  },
+  "quality": {
+    "title": "Качество, которое можно проверить.",
+    "note": "Документы открываются целиком — без регистрации и запросов.",
+    "documents": [
+      {
+        "title": "Сертификат соответствия",
+        "meta": "ТР ТС 025/2012",
+        "image": "media/cert-01.jpg"
+      },
+      {
+        "title": "Пожарная безопасность",
+        "meta": "Класс КМ1",
+        "image": "media/cert-02.jpg"
+      },
+      {
+        "title": "Гарантия 5 лет",
+        "meta": "Корпус и фасады",
+        "image": "media/cert-03.jpg"
+      },
+      {
+        "title": "Экология материалов",
+        "meta": "E0.5 / E1",
+        "image": "media/cert-04.jpg"
+      }
+    ],
+    "brands": [
+      "Blum",
+      "Hettich",
+      "Salice",
+      "Egger",
+      "Kronospan",
+      "Renner"
+    ]
+  },
+  "testimonials": [
+    {
+      "rating": 5,
+      "quote": "Мебель полностью изменила восприятие квартиры.",
+      "name": "Анна К.",
+      "city": "Москва",
+      "project": "кухня + гостиная",
+      "image": "media/review-01.jpg"
+    },
+    {
+      "rating": 5,
+      "quote": "Сделали то, что не смогли сделать две студии до вас.",
+      "name": "Дмитрий С.",
+      "city": "Москва",
+      "project": "гардеробная",
+      "image": "media/review-02.jpg"
+    },
+    {
+      "rating": 5,
+      "quote": "Срок назвали в начале и сдали день в день.",
+      "name": "Марина Л.",
+      "city": "Красногорск",
+      "project": "шкафы + прихожая",
+      "image": "media/review-03.jpg"
+    }
+  ],
+  "process": {
+    "title": "Как мы работаем",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Заявка",
+        "text": "Обсуждаем задачу и бюджет."
+      },
+      {
+        "n": "02",
+        "title": "Замер",
+        "text": "Выезд инженера, точная геометрия."
+      },
+      {
+        "n": "03",
+        "title": "Проектирование",
+        "text": "3D-визуализация и спецификация."
+      },
+      {
+        "n": "04",
+        "title": "Согласование",
+        "text": "Материалы, цвета, фурнитура."
+      },
+      {
+        "n": "05",
+        "title": "Производство",
+        "text": "Собственный цех, полный цикл."
+      },
+      {
+        "n": "06",
+        "title": "Монтаж",
+        "text": "Установка и чистая сдача."
+      }
+    ]
+  },
+  "ctaMeasure": {
+    "image": "media/cta-measure.jpg",
+    "title": [
+      "Ваш интерьер начинается",
+      "с точного замера."
+    ],
+    "primary": {
+      "label": "Вызвать замерщика",
+      "action": "form"
+    },
+    "secondary": {
+      "label": "Рассчитать стоимость",
+      "href": "#calculator"
+    }
+  },
+  "contactSection": {
+    "title": [
+      "Давайте создадим",
+      "вашу мебель."
+    ],
+    "cta": "Оставить заявку"
+  },
+  "footer": {
+    "columns": [
+      {
+        "title": "Навигация",
+        "links": [
+          {
+            "label": "Каталог",
+            "href": "#catalog"
+          },
+          {
+            "label": "Проекты",
+            "href": "#projects"
+          },
+          {
+            "label": "Материалы",
+            "href": "#materials"
+          },
+          {
+            "label": "Как работаем",
+            "href": "#process"
+          }
+        ]
+      },
+      {
+        "title": "Мебель",
+        "links": [
+          {
+            "label": "Кухни",
+            "href": "#catalog"
+          },
+          {
+            "label": "Шкафы-купе",
+            "href": "#catalog"
+          },
+          {
+            "label": "Гардеробные",
+            "href": "#catalog"
+          },
+          {
+            "label": "Гостиные",
+            "href": "#catalog"
+          }
+        ]
+      }
+    ],
+    "social": [
+      {
+        "label": "WhatsApp",
+        "href": "https://wa.me/74950000000"
+      },
+      {
+        "label": "Telegram",
+        "href": "https://t.me/olga_atelier"
+      },
+      {
+        "label": "Pinterest",
+        "href": "#"
+      }
+    ],
+    "legal": {
+      "label": "Политика конфиденциальности",
+      "href": "#"
+    },
+    "wordmark": "MADE FOR YOUR SPACE.",
+    "copyright": "© 2026 OLGA furniture atelier"
+  }
+}

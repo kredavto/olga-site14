@@ -1,0 +1,103 @@
+/* ============================================================
+   Design System «Olga» — tokens
+   Источник: rep1–rep5. Цвета сняты с самих изображений.
+   ============================================================ */
+:root {
+  /* ---------- Цвет: нейтральная база (rep3 + rep5) ---------- */
+  --c-ivory:      #F6F3EF;
+  --c-sand:       #EFE9E1;
+  --c-clay:       #DED3C6;
+  --c-stone:      #9A9490;
+  --c-espresso:   #352E2C;
+  --c-ink:        #1F1A18;
+
+  /* ---------- Цвет: акценты ---------- */
+  --c-ochre:      #8E621C;  /* rep5 — основной акцент */
+  --c-ochre-soft: #B8894A;
+  --c-terracotta: #AA5013;  /* rep2 — вторичный акцент */
+  --c-sea:        #6F8D9D;  /* rep3 — холодный баланс */
+  --c-sage:       #989F9D;
+
+  /* ---------- Цвет: небо для анимируемого фона (rep4) ---------- */
+  --c-sky-1:      #D9E5F1;
+  --c-sky-2:      #ABCCEF;
+  --c-sky-3:      #669FD4;
+  --c-sky-4:      #4476A7;
+
+  /* ---------- Семантика ---------- */
+  --bg:            var(--c-ivory);
+  --bg-alt:        var(--c-sand);
+  --bg-dark:       var(--c-espresso);
+  --fg:            var(--c-ink);
+  --fg-muted:      var(--c-stone);
+  --fg-on-dark:    var(--c-ivory);
+  --border:        color-mix(in srgb, var(--c-clay) 70%, transparent);
+  --accent:        var(--c-ochre);
+  --accent-2:      var(--c-terracotta);
+  --scrim:         linear-gradient(180deg, rgba(31,26,24,.38) 0%, rgba(31,26,24,0) 55%);
+
+  /* ---------- Типографика ---------- */
+  --font-display: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-ui:      "Jost", "Poppins", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --t-hero:    clamp(3.5rem, 9vw, 8.5rem);
+  --t-h1:      clamp(2.5rem, 5vw, 4.5rem);
+  --t-h2:      clamp(1.75rem, 3vw, 2.75rem);
+  --t-h3:      1.25rem;
+  --t-body-lg: 1.125rem;
+  --t-body:    1rem;
+  --t-caption: 0.8125rem;
+  --t-label:   0.75rem;
+
+  --lh-tight: 0.95;
+  --lh-head:  1.1;
+  --lh-body:  1.65;
+
+  --ls-hero:  -0.02em;
+  --ls-head:  -0.01em;
+  --ls-label:  0.14em;
+
+  --fw-light: 300;
+  --fw-reg:   400;
+  --fw-med:   500;
+  --fw-semi:  600;
+
+  --measure: 68ch;
+
+  /* ---------- Пространство (шаг 8px) ---------- */
+  --s-1:  4px;   --s-2:  8px;   --s-3:  12px;  --s-4:  16px;
+  --s-5:  24px;  --s-6:  32px;  --s-7:  48px;  --s-8:  64px;
+  --s-9:  96px;  --s-10: 128px; --s-11: 160px;
+
+  --container: 1440px;
+  --gutter:    24px;
+  --pad-x:     24px;          /* переопределяется на брейкпоинтах */
+  --section-y: var(--s-9);
+
+  /* ---------- Форма ---------- */
+  --r-sm:   8px;
+  --r-md:   16px;
+  --r-lg:   24px;
+  --r-pill: 999px;
+  --r-arch: 50% 50% 0 0 / 38% 38% 0 0;
+
+  --sh-card: 0 2px 12px rgba(31,26,24,.06);
+  --sh-lift: 0 12px 32px rgba(31,26,24,.10);
+
+  /* ---------- Движение ---------- */
+  --ease:   cubic-bezier(.22,.61,.36,1);
+  --d-fast: 180ms;
+  --d-base: 320ms;
+  --d-slow: 640ms;
+  --d-amb:  40s;              /* фоновая «живая» анимация (rep4) */
+
+  /* ---------- Слои ---------- */
+  --z-bg: 0; --z-content: 10; --z-header: 100; --z-overlay: 1000;
+}
+
+@media (min-width: 768px)  { :root { --pad-x: 48px; } }
+@media (min-width: 1024px) { :root { --pad-x: 80px; --section-y: var(--s-10); } }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --d-fast: 0ms; --d-base: 0ms; --d-slow: 0ms; --d-amb: 0s; }
+}

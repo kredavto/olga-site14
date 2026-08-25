@@ -1,0 +1,15 @@
+{
+  "name": "olga-showroom",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Цифровой интерьерный showroom мебели по индивидуальному проекту",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "media": "python3 tools/make_media.py",
+    "fonts": "bash tools/fetch_fonts.sh",
+    "setup": "npm run media && npm run fonts && npm run build",
+    "dev": "node build.mjs && python3 -m http.server 8100 --directory dist"
+  },
+  "engines": { "node": ">=18" }
+}
