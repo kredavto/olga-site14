@@ -5,7 +5,7 @@
     "title": "OLGA — мебель по индивидуальному проекту",
     "description": "Цифровой интерьерный showroom: кухни, гардеробные, шкафы и гостиные по индивидуальному проекту. Собственное производство, премиальные материалы, монтаж под ключ.",
     "url": "https://olga-site14.vercel.app",
-    "og": "https://olga-site14.vercel.app/media/og.jpg",
+    "og": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&crop=entropy&w=1200&h=630&q=78",
     "locale": "ru_RU"
   },
   "contacts": {
@@ -120,7 +120,8 @@
         "n": "01",
         "title": "Индивидуальный проект",
         "text": "Проектируем от архитектуры помещения, а не от готовых модулей.",
-        "image": "media/proj-p01-wide.jpg"
+        "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&crop=entropy&w=1400&h=1750&q=78",
+        "fallback": "media/proj-p01-wide.jpg"
       },
       {
         "n": "02",
@@ -322,7 +323,7 @@
   },
   "caseStudy": {
     "kicker": "Проект №01",
-    "image": "media/case-01.jpg",
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&crop=entropy&w=1920&h=1080&q=78",
     "title": "Квартира 128 м²",
     "scope": "Кухня + гостиная + гардеробная",
     "facts": [
@@ -353,7 +354,8 @@
       "эмаль",
       "камень",
       "премиальная фурнитура"
-    ]
+    ],
+    "fallback": "media/case-01.jpg"
   },
   "calculator": {
     "title": "Сколько будет стоить ваша мебель?",
@@ -614,7 +616,7 @@
   },
   "details": {
     "title": "Мебель в деталях",
-    "image": "media/hotspot-kitchen.jpg",
+    "image": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&crop=entropy&w=1800&h=1150&q=78",
     "hotspots": [
       {
         "n": "01",
@@ -644,7 +646,8 @@
         "title": "Скрытая фурнитура",
         "text": "Направляющие и петли вне поля зрения."
       }
-    ]
+    ],
+    "fallback": "media/hotspot-kitchen.jpg"
   },
   "production": {
     "title": [
@@ -731,7 +734,8 @@
       "name": "Анна К.",
       "city": "Москва",
       "project": "кухня + гостиная",
-      "image": "media/review-01.jpg"
+      "image": "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&crop=entropy&w=1500&h=1100&q=78",
+      "fallback": "media/review-01.jpg"
     },
     {
       "rating": 5,
@@ -739,7 +743,8 @@
       "name": "Дмитрий С.",
       "city": "Москва",
       "project": "гардеробная",
-      "image": "media/review-02.jpg"
+      "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&crop=entropy&w=1500&h=1100&q=78",
+      "fallback": "media/review-02.jpg"
     },
     {
       "rating": 5,
@@ -747,7 +752,8 @@
       "name": "Марина Л.",
       "city": "Красногорск",
       "project": "шкафы + прихожая",
-      "image": "media/review-03.jpg"
+      "image": "https://images.unsplash.com/photo-1416331108676-a22ccb276e35?auto=format&fit=crop&crop=entropy&w=1500&h=1100&q=78",
+      "fallback": "media/review-03.jpg"
     }
   ],
   "process": {
@@ -786,7 +792,7 @@
     ]
   },
   "ctaMeasure": {
-    "image": "media/cta-measure.jpg",
+    "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&crop=entropy&w=1920&h=1080&q=78",
     "title": [
       "Ваш интерьер начинается",
       "с точного замера."
@@ -798,7 +804,8 @@
     "secondary": {
       "label": "Рассчитать стоимость",
       "href": "#calculator"
-    }
+    },
+    "fallback": "media/cta-measure.jpg"
   },
   "contactSection": {
     "title": [

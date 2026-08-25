@@ -52,6 +52,20 @@
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0.06 });
   $$('.reveal, .clip-reveal, .split-line, .wordmark, .cat').forEach(el => io.observe(el));
 
+  /* ---------------------------------------------------------- запасные кадры */
+  // Удалённое изображение не загрузилось — молча подставляем локальный кадр
+  // той же секции, чтобы вместо фотографии не появлялась «битая картинка».
+  $$('img[data-fallback]').forEach(im => {
+    const swap = () => {
+      const fb = im.dataset.fallback;
+      if (!fb || im.dataset.swapped) return;
+      im.dataset.swapped = '1';
+      im.src = fb;
+    };
+    im.addEventListener('error', swap);
+    if (im.complete && im.naturalWidth === 0) swap();
+  });
+
   /* ---------------------------------------------------------- header */
   const header = $('.header');
   if (header) {
@@ -534,7 +548,7 @@
     let opener = null;
     const open = btn => {
       opener = btn;
-      img.src = btn.dataset.doc; img.alt = btn.dataset.title;
+      img.src = btn.dataset.doc; img.alt = btn.dataset.title; img.hidden = false;
       cap.textContent = btn.dataset.title;
       modal.classList.add('is-open');
       document.body.classList.add('is-locked');

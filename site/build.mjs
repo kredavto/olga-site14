@@ -40,6 +40,8 @@ const html = `<!doctype html>
 <title>${T.esc(d.meta.title)}</title>
 <meta name="description" content="${T.esc(d.meta.description)}">
 <meta name="theme-color" content="#0B0A09">
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="dns-prefetch" href="https://images.unsplash.com">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${T.esc(d.meta.title)}">
 <meta property="og:description" content="${T.esc(d.meta.description)}">

@@ -8,6 +8,17 @@ const attr = o => JSON.stringify(o).replace(/'/g, '&#39;').replace(/"/g, '&quot;
 const lines = (arr, cls = '') => arr.map(l => `<span class="split-line ${cls}"><span>${esc(l)}</span></span>`).join('');
 const ARROW = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2"/></svg>';
 
+/**
+ * Источник изображения. Если значение — внешний URL, локальный кадр той же
+ * секции остаётся запасным: не загрузилось (нет сети, ID протух) — показываем его,
+ * а не битую картинку.
+ */
+export const img = (src, alt, { fallback = '', cls = '', extra = '' } = {}) => {
+  const remote = /^https?:\/\//.test(String(src));
+  const fb = remote && fallback ? ` data-fallback="${esc(fallback)}"` : '';
+  return `<img src="${esc(src)}" alt="${esc(alt)}"${cls ? ` class="${esc(cls)}"` : ''}${fb}${extra ? ' ' + extra : ''} loading="lazy" decoding="async">`;
+};
+
 const icon = {
   wa: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.5 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6 0-1.2.6-1.8.9-2 .2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5-.3.3c-.1.1-.2.3 0 .5.2.3.7 1.2 1.6 1.9 1.1.9 1.9 1.2 2.2 1.3.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l2 1c.2.1.4.2.4.3.1.1.1.5-.1 1.1Z"/></svg>',
   tg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.4-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.3 12.6 1.8 11.2c-1-.3-1-1 .2-1.4l18.6-7.2c.8-.3 1.5.2 1.3 1.7Z"/></svg>',
@@ -106,7 +117,7 @@ export const usp = d => `
       <div class="usp__track">
         ${d.usp.items.map(i => `
         <article class="usp__item">
-          <div class="usp__media"><img src="${esc(i.image)}" alt="${esc(i.title)}" loading="lazy" decoding="async"></div>
+          <div class="usp__media">${img(i.image, i.title, { fallback: i.fallback })}</div>
           <div class="usp__body">
             <span class="usp__num">${esc(i.n)}</span>
             <h3 class="h-3">${esc(i.title)}</h3>
@@ -127,7 +138,7 @@ export const catalog = d => `
   </div>
   ${d.catalog.items.map(i => `
   <a class="cat" href="${esc(i.href)}" data-cursor="Смотреть">
-    <div class="cat__media"><img src="${esc(i.image)}" alt="${esc(i.title)}" loading="lazy" decoding="async"></div>
+    <div class="cat__media">${img(i.image, i.title, { fallback: i.fallback })}</div>
     <div class="wrap cat__in">
       <div class="cat__top">
         <span class="label">${esc(i.n)}</span>
@@ -173,7 +184,7 @@ export const projects = d => {
       <article class="pj ${shape(i)}" data-style="${esc(it.style)}" data-budget="${esc(it.budget)}" data-type="${esc(it.type)}">
         ${it.images.map((im, n) => `
         <figure class="pj__fig pj__${'abc'[n]} reveal">
-          <img src="${esc(im.src)}" alt="${esc(im.alt)}" data-depth="${[1, 1.6, 2.2][n]}" loading="lazy" decoding="async">
+          ${img(im.src, im.alt, { fallback: im.fallback, extra: `data-depth="${[1, 1.6, 2.2][n]}"` })}
           <figcaption>${esc(im.alt)}</figcaption>
         </figure>`).join('')}
         <div class="pj__meta">
@@ -199,7 +210,7 @@ export const caseStudy = d => {
 <section class="case" aria-labelledby="case-title">
   <div class="case__pin">
     <div class="case__frame">
-      <img src="${esc(c.image)}" alt="${esc(c.title)}" loading="lazy" decoding="async">
+      ${img(c.image, c.title, { fallback: c.fallback })}
       <div class="case__hud">
       <div>
         <span class="label">${esc(c.kicker)}</span>
@@ -334,7 +345,7 @@ export const materials = d => `
     <div class="mats">
       ${d.materials.items.map(m => `
       <figure class="mat reveal">
-        <img src="${esc(m.image)}" alt="${esc(m.label)}" loading="lazy" decoding="async">
+        ${img(m.image, m.label, { fallback: m.fallback })}
         <figcaption class="mat__cap"><b>${esc(m.label)}</b><i>${esc(m.sub)}</i></figcaption>
       </figure>`).join('')}
     </div>
@@ -351,7 +362,7 @@ export const details = d => `
     </div>
     <div class="hot clip-reveal">
       <span class="hot__frame clip-target">
-        <img src="${esc(d.details.image)}" alt="Кухня крупным планом" loading="lazy" decoding="async">
+        ${img(d.details.image, "Кухня крупным планом", { fallback: d.details.fallback })}
       </span>
       ${d.details.hotspots.map(s => `
       <div class="spot" style="left:${s.x}%; top:${s.y}%">
@@ -375,7 +386,7 @@ export const production = d => `
   <div class="prod__scene">
   <div class="prod__pin">
     ${d.production.steps.map(s => `
-    <div class="prod__layer"><img src="${esc(s.image)}" alt="${esc(s.title)}" loading="lazy" decoding="async"></div>`).join('')}
+    <div class="prod__layer">${img(s.image, s.title, { fallback: s.fallback })}</div>`).join('')}
     <div class="prod__ticks" aria-hidden="true">${d.production.steps.map(() => '<i></i>').join('')}</div>
     <div class="prod__hud">
       <div class="prod__stage">
@@ -401,7 +412,7 @@ export const quality = d => `
       ${d.quality.documents.map(doc => `
       <button class="doc reveal" type="button" data-doc="${esc(doc.image)}" data-title="${esc(doc.title)}" data-cursor="Открыть">
         <span class="doc__thumb">
-          <img src="${esc(doc.image)}" alt="${esc(doc.title)}" loading="lazy" decoding="async">
+          ${img(doc.image, doc.title, { fallback: doc.fallback })}
           <span class="doc__zoom">${icon.zoom}</span>
         </span>
         <span class="h-3">${esc(doc.title)}</span>
@@ -415,7 +426,7 @@ export const quality = d => `
 <div class="modal" role="dialog" aria-modal="true" aria-label="Документ">
   <div class="modal__box">
     <button class="btn btn--ghost btn--sm modal__close" type="button"><span class="btn__label">Закрыть</span></button>
-    <img src="" alt="">
+    <img alt="" hidden>
     <p class="label modal__cap"></p>
   </div>
 </div>`;
@@ -426,7 +437,7 @@ export const reviews = d => `
   <div class="reviews__pin">
     ${d.testimonials.map((t, i) => `
     <article class="rev${i === 0 ? ' is-on' : ''}">
-      <div class="rev__media"><img src="${esc(t.image)}" alt="Интерьер клиента: ${esc(t.project)}" loading="lazy" decoding="async"></div>
+      <div class="rev__media">${img(t.image, `Интерьер клиента: ${t.project}`, { fallback: t.fallback })}</div>
       <div class="wrap rev__body">
         <div class="rev__inner">
           <span class="rev__stars" aria-label="Оценка ${t.rating} из 5">${'★'.repeat(t.rating)}</span>
@@ -467,7 +478,7 @@ export const process = d => `
 /* ------------------------------------------------------------------ 14 cta */
 export const ctaMeasure = d => `
 <section class="measure grain" aria-labelledby="cta-title">
-  <div class="measure__bg"><img src="${esc(d.ctaMeasure.image)}" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+  <div class="measure__bg">${img(d.ctaMeasure.image, "", { fallback: d.ctaMeasure.fallback, extra: 'aria-hidden="true"' })}</div>
   <div class="wrap measure__in">
     <h2 class="h-hero measure__title" id="cta-title">${lines(d.ctaMeasure.title)}</h2>
     <div class="measure__actions">
