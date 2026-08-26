@@ -152,9 +152,11 @@
       {
         "n": "01",
         "title": "Кухни",
-        "image": "media/cat-kitchen.jpg",
+        "image": "https://unsplash.com/photos/RwXneIyqxAw/download?w=1600",
         "meta": "от 480 000 ₽ · 28 дней",
-        "href": "#projects"
+        "href": "#projects",
+        "fallback": "media/cat-kitchen.jpg",
+        "credit": "Unsplash — modern kitchen with grey cabinets"
       },
       {
         "n": "02",
