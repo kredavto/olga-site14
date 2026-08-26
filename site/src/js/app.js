@@ -267,10 +267,10 @@
         if (r.bottom < -100 || r.top > window.innerHeight + 100) continue;
         // -0.5 сверху экрана, +0.5 снизу: кадр «проезжает» медленнее секции
         const p = (r.top + r.height / 2 - window.innerHeight / 2) / (window.innerHeight + r.height);
-        const img = $('.cat__media img', cat);
-        if (img) img.style.transform = `translate3d(0, ${(p * 130).toFixed(1)}px, 0) scale(${(1.20 - Math.abs(p) * 0.06).toFixed(3)})`;
+        // Изображение не двигаем: оно показывается целиком (object-fit: contain),
+        // любой сдвиг или масштаб обрезал бы кадр. Движение ведёт типографика.
         const title = $('.cat__title', cat);
-        if (title) title.style.transform = `translate3d(0, ${(p * -46).toFixed(1)}px, 0)`;
+        if (title) title.style.transform = `translate3d(0, ${(p * -58).toFixed(1)}px, 0)`;
       }
     });
   }
