@@ -168,10 +168,22 @@
 
     /* Сцена: видео скрабится скроллом; без видео — последовательность кадров на canvas. */
     if (video && cfg.video) {
+      // Лёгкий файл на узких экранах — иначе мобильный тянет десктопный битрейт
+      video.src = matchMedia('(max-width: 720px)').matches && video.dataset.srcMobile
+        ? video.dataset.srcMobile : video.dataset.src;
       video.addEventListener('loadedmetadata', () => hero.classList.add('is-ready'), { once: true });
+
+      // Перемотка идёт в такт кадрам браузера: подряд идущие события скролла
+      // не должны ставить в очередь несколько seek — на этом видео и дёргается.
+      let want = 0, seeking = false;
+      const seek = () => {
+        seeking = false;
+        if (video.duration) video.currentTime = video.duration * want;
+      };
       onScroll(() => {
         progress = pinned(hero);
-        if (video.duration) video.currentTime = video.duration * progress;
+        want = progress;
+        if (!seeking) { seeking = true; requestAnimationFrame(seek); }
         paint(progress);
       });
     } else if (canvas && cfg.frames) {

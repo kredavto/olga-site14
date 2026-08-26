@@ -66,10 +66,12 @@ export const header = d => `
 export const hero = d => {
   const h = d.hero;
   const cfg = attr({ video: h.video, frames: h.frames });
+  // Источник выбирается в JS по ширине экрана: <source media> для этого
+  // ненадёжен, а мобильному нужен свой, лёгкий файл.
   const stage = h.video
-    ? `<video class="hero__video" playsinline muted preload="metadata" poster="${esc(h.frames.pattern.replace('{i}', '00'))}">
-         <source src="${esc(h.video)}" type="video/mp4">
-       </video>`
+    ? `<video class="hero__video" playsinline muted preload="auto"
+              poster="${esc(h.poster || h.frames.pattern.replace('{i}', '00'))}"
+              data-src="${esc(h.video)}" data-src-mobile="${esc(h.videoMobile || h.video)}"></video>`
     : `<canvas class="hero__canvas" aria-hidden="true"></canvas>`;
   return `
 <section class="hero grain" id="top" data-hero="${cfg}">
