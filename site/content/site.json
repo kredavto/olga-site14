@@ -162,19 +162,19 @@
       {
         "n": "02",
         "title": "Шкафы-купе",
-        "image": "https://images.unsplash.com/photo-1662454419622-a41092ecd245?auto=format&w=1600&q=80",
+        "image": "https://images.unsplash.com/photo-1714386450125-4ffb8fad9ef7?auto=format&w=1600&q=80",
         "meta": "от 180 000 ₽ · 21 день",
         "href": "#projects",
-        "fallback": "media/cat-wardrobe-sliding.jpg",
+        "fallback": "media/cat-dressing.jpg",
         "credit": "Unsplash"
       },
       {
         "n": "03",
         "title": "Гардеробные",
-        "image": "https://images.unsplash.com/photo-1714386450125-4ffb8fad9ef7?auto=format&w=1600&q=80",
+        "image": "https://images.unsplash.com/photo-1662454419622-a41092ecd245?auto=format&w=1600&q=80",
         "meta": "от 320 000 ₽ · 24 дня",
         "href": "#projects",
-        "fallback": "media/cat-dressing.jpg",
+        "fallback": "media/cat-wardrobe-sliding.jpg",
         "credit": "Unsplash"
       },
       {
