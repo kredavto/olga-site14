@@ -143,6 +143,7 @@
     const bar    = $('.hero__progress i', hero);
     const annos  = $$('.anno', hero);
     const content = $('.hero__content', hero);
+    const hint = $('.hero__scroll', hero);
     let progress = 0;
 
     /* Аннотации: появляются в своей точке таймлайна, линия ведёт к детали мебели. */
@@ -234,9 +235,13 @@
       if (bar) bar.style.width = (p * 100).toFixed(2) + '%';
       paintAnnos(p);
       if (content && !REDUCED) {
-        const k = clamp(p / 0.32);
-        content.style.transform = `translate3d(0, ${-k * 60}px, 0)`;
-        content.style.opacity = String(1 - k * 0.92);
+        // Текст уходит до появления первой аннотации (12.5% прокрутки),
+        // иначе заголовок и подписи к деталям спорят друг с другом.
+        const k = clamp(p / 0.10);
+        content.style.transform = `translate3d(0, ${-k * 90}px, 0)`;
+        content.style.opacity = String(1 - k);
+        content.style.pointerEvents = k > 0.85 ? 'none' : '';   // невидимые кнопки не должны ловить клики
+        if (hint) { hint.style.opacity = String(1 - k); hint.style.pointerEvents = 'none'; }
       }
     }
     addEventListener('resize', () => annos.forEach(layoutAnno), { passive: true });

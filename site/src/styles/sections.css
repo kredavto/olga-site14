@@ -32,17 +32,23 @@
   transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out), filter 900ms var(--ease-out); }
 .anno__dot {
   position: absolute; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%;
-  background: var(--brass); box-shadow: 0 0 0 6px rgba(216,178,124,.16);
+  background: var(--brass); box-shadow: 0 0 0 6px rgba(216,178,124,.20), 0 0 14px rgba(0,0,0,.6);
 }
 .anno.is-on .anno__dot { animation: pulse 3.6s var(--ease-io) infinite; }
 @keyframes pulse { 0%,100% { box-shadow: 0 0 0 5px rgba(216,178,124,.14); } 50% { box-shadow: 0 0 0 12px rgba(216,178,124,.05); } }
 .anno__line { position: absolute; height: 1px; transform-origin: 0 50%;
-  background: linear-gradient(90deg, rgba(216,178,124,.85), rgba(216,178,124,.18)); }
+  background: linear-gradient(90deg, rgba(216,178,124,.95), rgba(216,178,124,.30));
+  box-shadow: 0 0 6px rgba(0,0,0,.5); }
+/* Плашка должна читаться и на тёмном кадре, и на светлой стене, поэтому
+   контраст держится на собственном фоне, а не на backdrop-filter —
+   он поддерживается не везде. */
 .anno__tag {
-  position: absolute; white-space: nowrap; padding: 8px 14px;
-  border: 1px solid rgba(216,178,124,.35); border-radius: var(--r-pill);
-  background: rgba(11,10,9,.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-  font-size: var(--t-label); text-transform: uppercase; letter-spacing: var(--ls-label);
+  position: absolute; white-space: nowrap; padding: 9px 15px;
+  border: 1px solid rgba(216,178,124,.55); border-radius: var(--r-pill);
+  background: rgba(9,8,7,.86); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  box-shadow: 0 8px 28px rgba(0,0,0,.5);
+  color: var(--milk); font-size: var(--t-label); font-weight: 500;
+  text-transform: uppercase; letter-spacing: var(--ls-label);
   transform: translate(-50%, -50%);
 }
 .anno.is-on .anno__tag { animation: float 7s var(--ease-io) infinite; }
