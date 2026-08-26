@@ -168,9 +168,11 @@
       {
         "n": "03",
         "title": "Гардеробные",
-        "image": "media/cat-dressing.jpg",
+        "image": "https://images.unsplash.com/photo-1714386450125-4ffb8fad9ef7?auto=format&w=1600&q=80",
         "meta": "от 320 000 ₽ · 24 дня",
-        "href": "#projects"
+        "href": "#projects",
+        "fallback": "media/cat-dressing.jpg",
+        "credit": "Unsplash"
       },
       {
         "n": "04",
