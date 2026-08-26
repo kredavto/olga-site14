@@ -175,9 +175,11 @@
       {
         "n": "04",
         "title": "Гостиные",
-        "image": "media/cat-living.jpg",
+        "image": "https://images.unsplash.com/photo-1631510390389-c1e4fb20ff31?auto=format&w=1600&q=80",
         "meta": "от 260 000 ₽ · 26 дней",
-        "href": "#projects"
+        "href": "#projects",
+        "fallback": "media/cat-living.jpg",
+        "credit": "Unsplash"
       }
     ]
   },
