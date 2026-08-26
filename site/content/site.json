@@ -60,8 +60,8 @@
       "href": "#projects"
     },
     "scrollHint": "Scroll to explore",
-    "video": null,
-    "videoMobile": null,
+    "video": "media/hero.mp4",
+    "videoMobile": "media/hero-mobile.mp4",
     "frames": {
       "pattern": "media/hero-{i}.jpg",
       "count": 40,
@@ -69,46 +69,47 @@
     },
     "annotations": [
       {
-        "at": 0.16,
-        "label": "Натуральный шпон",
-        "x": 26,
-        "y": 62,
-        "tx": 8,
-        "ty": 34
-      },
-      {
-        "at": 0.34,
+        "at": 0.125,
         "label": "Скрытая фурнитура",
-        "x": 70,
-        "y": 46,
-        "tx": 84,
+        "x": 44,
+        "y": 44,
+        "tx": 62,
         "ty": 22
       },
       {
-        "at": 0.52,
-        "label": "Фасады в эмали",
-        "x": 40,
-        "y": 52,
-        "tx": 14,
-        "ty": 26
-      },
-      {
-        "at": 0.7,
-        "label": "Индивидуальная геометрия",
-        "x": 62,
-        "y": 66,
-        "tx": 78,
-        "ty": 78
-      },
-      {
-        "at": 0.86,
+        "at": 0.25,
         "label": "Встроенная подсветка",
-        "x": 46,
-        "y": 44,
-        "tx": 22,
-        "ty": 74
+        "x": 80,
+        "y": 20,
+        "tx": 58,
+        "ty": 34
+      },
+      {
+        "at": 0.375,
+        "label": "Фасады в эмали",
+        "x": 57,
+        "y": 60,
+        "tx": 78,
+        "ty": 76
+      },
+      {
+        "at": 0.625,
+        "label": "Индивидуальная геометрия",
+        "x": 50,
+        "y": 55,
+        "tx": 86,
+        "ty": 34
+      },
+      {
+        "at": 0.938,
+        "label": "Натуральный шпон",
+        "x": 25,
+        "y": 46,
+        "tx": 14,
+        "ty": 72
       }
-    ]
+    ],
+    "poster": "https://images.unsplash.com/photo-1558442074-3c19857bc1dc?auto=format&w=1600&q=80"
   },
   "usp": {
     "statement": [
