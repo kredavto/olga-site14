@@ -261,14 +261,20 @@
   /* ---------------------------------------------------------- 03 КАТАЛОГ: проход сквозь пространства */
   const cats = $$('.cat');
   if (cats.length && !REDUCED) {
+    const narrowMQ = matchMedia('(max-width: 720px)');
     onScroll(() => {
+      const narrow = narrowMQ.matches;
       for (const cat of cats) {
         const r = cat.getBoundingClientRect();
         if (r.bottom < -100 || r.top > window.innerHeight + 100) continue;
         // -0.5 сверху экрана, +0.5 снизу: кадр «проезжает» медленнее секции
         const p = (r.top + r.height / 2 - window.innerHeight / 2) / (window.innerHeight + r.height);
-        // Изображение не двигаем: оно показывается целиком (object-fit: contain),
-        // любой сдвиг или масштаб обрезал бы кадр. Движение ведёт типографика.
+        // Сдвиг кадра — внутри 8% запаса по высоте, края не открываются.
+        // На мобильном плитка равна пропорции кадра, запаса нет — не двигаем.
+        if (!narrow) {
+          const im = $('.cat__media img', cat);
+          if (im) im.style.transform = `translate3d(0, ${(p * 44).toFixed(1)}px, 0)`;
+        }
         const title = $('.cat__title', cat);
         if (title) title.style.transform = `translate3d(0, ${(p * -58).toFixed(1)}px, 0)`;
       }

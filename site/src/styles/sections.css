@@ -98,10 +98,12 @@
   border-top: 1px solid var(--line-soft);
 }
 .cat__media { position: absolute; inset: 0; overflow: hidden; background: var(--g-1000); }
-/* contain, а не cover: кадр каталога показывается целиком, без обрезки краёв.
-   Поэтому же у изображения нет масштабирования — параллакс здесь ведёт заголовок. */
-.cat__media img { width: 100%; height: 100%; object-fit: contain; object-position: center;
-  transition: filter var(--d-slow) var(--ease); }
+/* cover, чтобы кадр заполнял плитку по ширине — без тёмных полей по бокам.
+   Изображение чуть выше контейнера: это и уменьшает обрезку, и даёт запас,
+   внутри которого кадр может двигаться при скролле, не открывая краёв. */
+.cat__media img { position: absolute; left: 0; top: -8%;
+  width: 100%; height: 116%; object-fit: cover; object-position: center;
+  will-change: transform; transition: filter var(--d-slow) var(--ease); }
 .cat::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(7,7,6,.62), rgba(7,7,6,.10) 42%, rgba(7,7,6,.78));
@@ -134,6 +136,7 @@
 @media (max-width: 720px) {
   .cat { height: auto; min-height: 0; display: flex; flex-direction: column; }
   .cat__media { position: relative; inset: auto; aspect-ratio: 3 / 2; }
+  .cat__media img { top: 0; height: 100%; }
   .cat::after { inset: 0 0 auto 0; height: 0; padding-bottom: 66.6667%; }
   .cat__in { height: auto; padding-block: var(--s-5) var(--s-7); gap: var(--s-4);
     display: flex; flex-direction: column; }
