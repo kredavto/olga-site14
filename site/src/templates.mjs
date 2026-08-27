@@ -75,7 +75,7 @@ export const hero = d => {
   const stage = h.video
     ? `<img class="hero__poster" src="${poster}" alt="" aria-hidden="true"
             data-fallback="${posterFb}">
-       <video class="hero__video" playsinline muted preload="auto" poster="${poster}"
+       <video class="hero__video" playsinline muted autoplay preload="auto" poster="${poster}"
               data-src="${esc(h.video)}" data-src-mobile="${esc(h.videoMobile || h.video)}"></video>`
     : `<canvas class="hero__canvas" aria-hidden="true"></canvas>`;
   return `

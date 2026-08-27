@@ -170,8 +170,10 @@
     /* Сцена: видео скрабится скроллом; без видео — последовательность кадров на canvas. */
     if (video && cfg.video) {
       // Лёгкий файл на узких экранах — иначе мобильный тянет десктопный битрейт
-      video.src = matchMedia('(max-width: 720px)').matches && video.dataset.srcMobile
-        ? video.dataset.srcMobile : video.dataset.src;
+      const attach = () => {
+        video.src = matchMedia('(max-width: 720px)').matches && video.dataset.srcMobile
+          ? video.dataset.srcMobile : video.dataset.src;
+      };
 
       if (cfg.playback !== 'scrub') {
         // Сначала показываем фотографию-постер, затем поверх неё проявляется видео.
@@ -181,14 +183,17 @@
         if (cfg.playback === 'loop') video.loop = true;
         video.muted = true;                       // свойство, а не только атрибут: без него автозапуск запрещён
 
-        // Слой открывается по событию playing, а не «на всякий случай»: пока
-        // кадров нет, поверх фотографии не должно появиться пустое место.
-        video.addEventListener('playing', () => hero.classList.replace('is-offered', 'is-playing')
-          || hero.classList.add('is-playing'));
-        video.addEventListener('error', () => hero.classList.remove('is-playing'));
-
         const btn = $('.hero__play', hero);
         const offer = () => hero.classList.add('is-offered');   // показать кнопку запуска
+
+        // Фотография уходит по событию playing, а не «на всякий случай»: пока
+        // кадров нет, она должна закрывать ролик.
+        video.addEventListener('playing', () => hero.classList.replace('is-offered', 'is-playing')
+          || hero.classList.add('is-playing'));
+        // Файл не открылся или браузер его не декодирует — оставляем фотографию
+        // и предлагаем кнопку, а не пустой экран без объяснений.
+        video.addEventListener('error', () => { hero.classList.remove('is-playing'); offer(); });
+
         let armed = false;
 
         // Автозапуск может быть запрещён (политика браузера, экономия энергии,
@@ -197,7 +202,7 @@
         const armGesture = () => {
           if (armed) return;
           armed = true;
-          const go = () => { play(); };
+          const go = () => { if (!video.src) attach(); play(); };
           ['pointerdown', 'keydown', 'touchstart', 'wheel'].forEach(t =>
             addEventListener(t, go, { once: true, passive: true }));
         };
@@ -208,13 +213,19 @@
           if (r && r.catch) r.catch(() => { offer(); armGesture(); });
         };
 
-        // Ждём только паузу «на фотографию». Ждать canplay нельзя: Safari не
-        // догружает медиа заранее, событие может не прийти вовсе — и ролик
-        // тогда не запускался никогда.
-        setTimeout(() => { if (REDUCED) offer(); else play(); }, INTRO);
+        // Источник подключается только после паузы «на фотографию»: у элемента
+        // стоит autoplay, и с ранним src браузер стартовал бы сразу, съев паузу.
+        // Дальше запуск делает сам браузер — это надёжнее, чем play() из JS;
+        // play() ниже лишь подстраховка. Ждать canplay нельзя: Safari не
+        // догружает медиа заранее, и событие может не прийти вовсе.
+        setTimeout(() => {
+          if (REDUCED) { offer(); return; }   // источник подключит кнопка
+          attach();
+          play();
+        }, INTRO);
         if (btn) btn.addEventListener('click', () => {
           hero.classList.remove('is-offered', 'is-ended');
-          video.currentTime = 0;
+          if (!video.src) attach(); else video.currentTime = 0;
           play();
         });
 
@@ -241,6 +252,7 @@
         // Текст hero остаётся обычным содержимым экрана — гасить его нечем и незачем
         onScroll(() => { if (bar) bar.style.width = '0%'; });
       } else {
+      attach();
       video.addEventListener('loadedmetadata', () => hero.classList.add('is-ready'), { once: true });
 
       // Перемотка идёт в такт кадрам браузера: подряд идущие события скролла
