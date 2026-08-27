@@ -212,7 +212,12 @@ export const caseStudy = d => {
 <section class="case" aria-labelledby="case-title">
   <div class="case__pin">
     <div class="case__frame">
-      ${img(c.image, c.title, { fallback: c.fallback })}
+      ${c.video
+        ? `<video class="case__video" playsinline muted loop preload="metadata"
+                  poster="${esc(c.poster || c.image)}"
+                  data-src="${esc(c.video)}" data-src-mobile="${esc(c.videoMobile || c.video)}"
+                  aria-label="${esc(c.title)}"></video>`
+        : img(c.image, c.title, { fallback: c.fallback })}
       <div class="case__hud">
       <div>
         <span class="label">${esc(c.kicker)}</span>

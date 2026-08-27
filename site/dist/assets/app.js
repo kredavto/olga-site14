@@ -386,6 +386,24 @@
     });
   }
 
+  /* ---------------------------------------------------------- фоновое видео кейса */
+  // Кадр кейса и без того растёт при скролле, поэтому видео здесь не скрабится,
+  // а просто идёт по кругу. Играет только пока секция на экране — иначе
+  // декодер работает вхолостую всю страницу.
+  const caseVideo = $('.case__video');
+  if (caseVideo) {
+    caseVideo.src = matchMedia('(max-width: 720px)').matches && caseVideo.dataset.srcMobile
+      ? caseVideo.dataset.srcMobile : caseVideo.dataset.src;
+    if (REDUCED) {
+      caseVideo.removeAttribute('loop');      // при reduced-motion остаётся постер
+    } else {
+      new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) caseVideo.play().catch(() => {});
+        else caseVideo.pause();
+      }), { rootMargin: '10% 0px' }).observe(caseVideo);
+    }
+  }
+
   /* ---------------------------------------------------------- 06 КАЛЬКУЛЯТОР */
   const calc = $('.calc');
   if (calc) {

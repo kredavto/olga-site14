@@ -363,7 +363,10 @@
       "камень",
       "премиальная фурнитура"
     ],
-    "fallback": "media/case-01.jpg"
+    "fallback": "media/case-01.jpg",
+    "video": "media/case-01.mp4",
+    "videoMobile": "media/case-01-mobile.mp4",
+    "poster": "media/case-01-poster.jpg"
   },
   "calculator": {
     "title": "Сколько будет стоить ваша мебель?",
