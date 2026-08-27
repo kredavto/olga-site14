@@ -225,8 +225,17 @@
           // Сторож. play() может не вернуть ни успеха, ни отказа: обещание
           // остаётся висеть, если медиа так и не подготовилось. Тогда не
           // срабатывает ни ветка отказа, ни error — и экран остаётся без
-          // ролика и без объяснений. Через 6 с показываем кнопку.
-          setTimeout(() => { if (!hero.classList.contains('is-playing')) offer(); }, 6000);
+          // ролика и без объяснений.
+          // Считаем не время, а движение загрузки: на медленном канале ролик
+          // стартует поздно, но исправно, и мигать кнопкой там незачем.
+          let lastBuf = -1, idle = 0;
+          const watch = setInterval(() => {
+            if (hero.classList.contains('is-playing')) { clearInterval(watch); return; }
+            const buf = video.buffered.length ? video.buffered.end(0) : 0;
+            idle = buf > lastBuf ? 0 : idle + 1;
+            lastBuf = buf;
+            if (idle >= 2) { offer(); clearInterval(watch); }   // ~8 с без движения
+          }, 4000);
         }, INTRO);
         if (btn) btn.addEventListener('click', () => {
           hero.classList.remove('is-offered', 'is-ended');
