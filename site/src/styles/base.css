@@ -33,7 +33,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ---------- Типографика ---------- */
 .h-mega, .h-hero, .h-1, .h-2 {
-  font-family: var(--font-display); font-weight: 500; margin: 0;
+  font-family: var(--font-display); font-weight: 400; margin: 0;
   letter-spacing: var(--ls-head); text-wrap: balance;
 }
 .h-mega { font-size: var(--t-mega); line-height: var(--lh-tight); letter-spacing: var(--ls-mega); }
@@ -52,7 +52,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   letter-spacing: var(--ls-label); line-height: 1.2; color: var(--fg-muted);
 }
 .num {
-  font-family: var(--font-display); font-variant-numeric: tabular-nums;
+  font-family: var(--font-num); font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em; color: var(--accent);
 }
 
@@ -124,7 +124,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .logo { display: flex; align-items: baseline; gap: var(--s-2); }
 .logo__mark {
-  font-family: var(--font-display); font-size: 1.375rem; font-weight: 600;
+  font-family: var(--font-num); font-size: 1.375rem; font-weight: 600;
   letter-spacing: 0.24em; text-transform: uppercase;
 }
 .logo__sub { font-size: var(--t-label); letter-spacing: var(--ls-label);
@@ -175,7 +175,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .menu.is-open { opacity: 1; visibility: visible; transform: none; }
 .menu__list { display: flex; flex-direction: column; gap: var(--s-4); }
-.menu__list a { font-family: var(--font-display); font-size: clamp(2rem, 9vw, 3rem);
+.menu__list a { font-family: var(--font-num); font-size: clamp(2rem, 9vw, 3rem);
   font-weight: 500; letter-spacing: var(--ls-head); }
 .menu__foot { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; }
 

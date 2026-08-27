@@ -40,10 +40,15 @@
   --glass:     rgba(16,15,14,.62);
   --scrim:     linear-gradient(180deg, rgba(7,7,6,.72) 0%, rgba(7,7,6,.18) 42%, rgba(7,7,6,.86) 100%);
 
-  /* ---------- Типографика: neo-grotesk ---------- */
-  --font-display: "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* ---------- Типографика ----------
+     Заголовки — контрастная антиква (по референсу rep4: тонкие волосные,
+     крупный контраст штриха, каплевидные окончания). Цифры, логотип и
+     служебные элементы остаются на гротеске: в антикве на мелких кеглях
+     они теряют читаемость и перестают выглядеть частью интерфейса. */
+  --font-display: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --font-num:     "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-ui:      "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-editorial: "Playfair Display", Georgia, serif;   /* только крупная цитата */
+  --font-editorial: var(--font-display);
 
   --t-mega: clamp(3rem, 9.5vw, 8.5rem);    /* 56 → 136 px */
   --t-hero: clamp(2.6rem, 6.4vw, 6.25rem);
@@ -58,8 +63,8 @@
   --lh-tight: 0.92;
   --lh-head:  1.06;
   --lh-body:  1.6;
-  --ls-mega:  -0.035em;
-  --ls-head:  -0.02em;
+  --ls-mega:  -0.02em;    /* значения из design-system/tokens.json (scale.hero) */
+  --ls-head:  -0.01em;    /* scale.h1 */
   --ls-label:  0.14em;   /* = --ls-label из design-system */
 
   --measure: 46ch;
@@ -129,7 +134,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ---------- Типографика ---------- */
 .h-mega, .h-hero, .h-1, .h-2 {
-  font-family: var(--font-display); font-weight: 500; margin: 0;
+  font-family: var(--font-display); font-weight: 400; margin: 0;
   letter-spacing: var(--ls-head); text-wrap: balance;
 }
 .h-mega { font-size: var(--t-mega); line-height: var(--lh-tight); letter-spacing: var(--ls-mega); }
@@ -148,7 +153,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   letter-spacing: var(--ls-label); line-height: 1.2; color: var(--fg-muted);
 }
 .num {
-  font-family: var(--font-display); font-variant-numeric: tabular-nums;
+  font-family: var(--font-num); font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em; color: var(--accent);
 }
 
@@ -220,7 +225,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .logo { display: flex; align-items: baseline; gap: var(--s-2); }
 .logo__mark {
-  font-family: var(--font-display); font-size: 1.375rem; font-weight: 600;
+  font-family: var(--font-num); font-size: 1.375rem; font-weight: 600;
   letter-spacing: 0.24em; text-transform: uppercase;
 }
 .logo__sub { font-size: var(--t-label); letter-spacing: var(--ls-label);
@@ -271,7 +276,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 .menu.is-open { opacity: 1; visibility: visible; transform: none; }
 .menu__list { display: flex; flex-direction: column; gap: var(--s-4); }
-.menu__list a { font-family: var(--font-display); font-size: clamp(2rem, 9vw, 3rem);
+.menu__list a { font-family: var(--font-num); font-size: clamp(2rem, 9vw, 3rem);
   font-weight: 500; letter-spacing: var(--ls-head); }
 .menu__foot { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; }
 
@@ -416,6 +421,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
   border-left: 9px solid var(--accent);
   border-top: 6px solid transparent; border-bottom: 6px solid transparent;
 }
+/* На узком экране заголовок доходит до середины кадра — уводим кнопку выше,
+   иначе она ложится прямо на текст. */
+@media (max-width: 720px) {
+  .hero__play { top: 30%; }
+}
 .hero__stage::after { content: ""; position: absolute; inset: 0; background: var(--scrim); }
 
 .hero__content {
@@ -490,7 +500,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .usp__media { position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: var(--r-md); background: var(--g-900); }
 .usp__media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); transition: transform var(--d-cine) var(--ease-out); }
 .usp__item.is-live .usp__media img { transform: scale(1); }
-.usp__num { font-family: var(--font-display); font-size: var(--t-h2); color: var(--accent); }
+.usp__num { font-family: var(--font-num); font-size: var(--t-h2); color: var(--accent); }
 .usp__body { display: flex; flex-direction: column; gap: var(--s-2); }
 .usp__body p { margin: 0; color: var(--fg-muted); max-width: 34ch; }
 .usp__rail { position: absolute; left: var(--pad-x); right: var(--pad-x); bottom: var(--s-7); height: 1px; background: var(--line-soft); }
@@ -531,7 +541,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .cat__top { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s-4); }
 .cat__bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-5); flex-wrap: wrap; }
 .cat__title {
-  font-family: var(--font-display); font-weight: 500; letter-spacing: var(--ls-mega);
+  font-family: var(--font-display); font-weight: 400; letter-spacing: var(--ls-mega);
   font-size: clamp(2.5rem, 7vw, 6rem); line-height: .95; margin: 0;
   will-change: transform;
 }
@@ -628,7 +638,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 @media (min-width: 860px) { .case__facts { grid-template-columns: repeat(4, 1fr); gap: var(--s-6); } }
 .fact { opacity: 0; transform: translateY(18px); }
 .fact.is-on { opacity: 1; transform: none; transition: opacity var(--d-slow) var(--ease-out), transform var(--d-slow) var(--ease-out); }
-.fact__v { font-family: var(--font-display); font-size: clamp(1.25rem, 2.6vw, 2.25rem);
+.fact__v { font-family: var(--font-num); font-size: clamp(1.25rem, 2.6vw, 2.25rem);
   font-weight: 500; letter-spacing: var(--ls-head); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .case__mats { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-5); }
 .case__mats span { font-size: var(--t-label); text-transform: uppercase; letter-spacing: var(--ls-label);
@@ -641,7 +651,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .calc__steps { display: flex; flex-direction: column; gap: var(--s-6); }
 .step { border-top: 1px solid var(--line-soft); padding-top: var(--s-5); }
 .step__head { display: flex; align-items: baseline; gap: var(--s-3); margin-bottom: var(--s-4); }
-.step__n { color: var(--accent); font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+.step__n { color: var(--accent); font-family: var(--font-num); font-variant-numeric: tabular-nums; }
 .opts { display: flex; flex-wrap: wrap; gap: var(--s-2); }
 .opt {
   padding: 13px 20px; border: 1px solid var(--line); border-radius: var(--r-pill);
@@ -653,7 +663,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .dims { display: grid; gap: var(--s-5); }
 @media (min-width: 640px) { .dims { grid-template-columns: repeat(3, 1fr); } }
 .dim__top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--s-3); }
-.dim__val { font-family: var(--font-display); font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.dim__val { font-family: var(--font-num); font-size: 1.25rem; font-variant-numeric: tabular-nums; }
 .dim input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 1px;
   background: var(--line-hard); border-radius: 1px; outline-offset: 8px; }
 .dim input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px;
@@ -664,7 +674,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .calc__panel { position: sticky; top: calc(var(--header-h) + var(--s-4));
   border: 1px solid var(--line); border-radius: var(--r-md); padding: var(--s-6);
   background: linear-gradient(180deg, rgba(36,33,31,.5), rgba(11,10,9,.5)); }
-.calc__sum { font-family: var(--font-display); font-weight: 500; letter-spacing: var(--ls-mega);
+.calc__sum { font-family: var(--font-num); font-weight: 500; letter-spacing: var(--ls-mega);
   white-space: nowrap; font-size: clamp(1.75rem, 3.4vw, 2.75rem); line-height: 1; font-variant-numeric: tabular-nums;
   margin: var(--s-3) 0 var(--s-2); }
 .calc__spec { display: flex; flex-direction: column; gap: var(--s-2); margin: var(--s-5) 0;
@@ -842,7 +852,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .doc:hover .doc__zoom { opacity: 1; }
 .brands { display: flex; flex-wrap: wrap; gap: var(--s-5) var(--s-8); margin-top: var(--s-8);
   border-top: 1px solid var(--line-soft); padding-top: var(--s-6); }
-.brands span { font-family: var(--font-display); font-size: 1.125rem; letter-spacing: .1em;
+.brands span { font-family: var(--font-num); font-size: 1.125rem; letter-spacing: .1em;
   text-transform: uppercase; color: var(--fg-muted); }
 
 /* Модалка документа */
@@ -931,7 +941,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .footer__bottom { display: flex; flex-wrap: wrap; gap: var(--s-4); justify-content: space-between;
   border-top: 1px solid var(--line-soft); margin-top: var(--s-8); padding-block: var(--s-5); }
 .wordmark {
-  font-family: var(--font-display); font-weight: 600; letter-spacing: -0.02em;
+  font-family: var(--font-display); font-weight: 500; letter-spacing: -0.01em;
   font-size: clamp(2rem, 11vw, 11rem); line-height: .9; margin: 0;
   padding-bottom: clamp(var(--s-4), 3vw, var(--s-7));
   color: transparent; -webkit-text-stroke: 1px rgba(246,243,239,.20);

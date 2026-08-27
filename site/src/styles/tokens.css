@@ -40,10 +40,15 @@
   --glass:     rgba(16,15,14,.62);
   --scrim:     linear-gradient(180deg, rgba(7,7,6,.72) 0%, rgba(7,7,6,.18) 42%, rgba(7,7,6,.86) 100%);
 
-  /* ---------- Типографика: neo-grotesk ---------- */
-  --font-display: "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* ---------- Типографика ----------
+     Заголовки — контрастная антиква (по референсу rep4: тонкие волосные,
+     крупный контраст штриха, каплевидные окончания). Цифры, логотип и
+     служебные элементы остаются на гротеске: в антикве на мелких кеглях
+     они теряют читаемость и перестают выглядеть частью интерфейса. */
+  --font-display: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --font-num:     "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-ui:      "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-editorial: "Playfair Display", Georgia, serif;   /* только крупная цитата */
+  --font-editorial: var(--font-display);
 
   --t-mega: clamp(3rem, 9.5vw, 8.5rem);    /* 56 → 136 px */
   --t-hero: clamp(2.6rem, 6.4vw, 6.25rem);
@@ -58,8 +63,8 @@
   --lh-tight: 0.92;
   --lh-head:  1.06;
   --lh-body:  1.6;
-  --ls-mega:  -0.035em;
-  --ls-head:  -0.02em;
+  --ls-mega:  -0.02em;    /* значения из design-system/tokens.json (scale.hero) */
+  --ls-head:  -0.01em;    /* scale.h1 */
   --ls-label:  0.14em;   /* = --ls-label из design-system */
 
   --measure: 46ch;
