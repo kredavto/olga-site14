@@ -82,6 +82,10 @@ export const hero = d => {
 <section class="hero grain" id="top" data-hero="${cfg}" data-playback="${esc(h.video ? (h.playback || 'scrub') : 'scrub')}">
   <div class="hero__pin">
     <div class="hero__stage">${stage}</div>
+    ${h.video ? `<button class="hero__play" type="button">
+      <span class="hero__play-i" aria-hidden="true"></span>
+      <span>${esc(h.playLabel || 'Смотреть ролик')}</span>
+    </button>` : ''}
 
     <div class="hero__annos" aria-hidden="true">
       ${h.annotations.map(a => `

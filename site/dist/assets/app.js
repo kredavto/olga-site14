@@ -179,20 +179,44 @@
         const INTRO = 1400;                       // сколько держим фотографию до старта
         hero.classList.add('is-ready');           // постер появляется сразу
         if (cfg.playback === 'loop') video.loop = true;
+        video.muted = true;                       // свойство, а не только атрибут: без него автозапуск запрещён
 
-        let started = false;
-        const start = () => {
-          if (started || REDUCED) return;
-          started = true;
-          hero.classList.add('is-playing');
-          video.play().catch(() => { hero.classList.remove('is-playing'); });
+        // Слой открывается по событию playing, а не «на всякий случай»: пока
+        // кадров нет, поверх фотографии не должно появиться пустое место.
+        video.addEventListener('playing', () => hero.classList.replace('is-offered', 'is-playing')
+          || hero.classList.add('is-playing'));
+        video.addEventListener('error', () => hero.classList.remove('is-playing'));
+
+        const btn = $('.hero__play', hero);
+        const offer = () => hero.classList.add('is-offered');   // показать кнопку запуска
+        let armed = false;
+
+        // Автозапуск может быть запрещён (политика браузера, экономия энергии,
+        // reduced-motion). Тогда ролик ждёт первого действия пользователя —
+        // и параллельно предлагает явную кнопку, чтобы это не выглядело поломкой.
+        const armGesture = () => {
+          if (armed) return;
+          armed = true;
+          const go = () => { play(); };
+          ['pointerdown', 'keydown', 'touchstart', 'wheel'].forEach(t =>
+            addEventListener(t, go, { once: true, passive: true }));
         };
-        // Ждём и паузу на «показ фотографии», и готовность ролика — что дольше
-        const ready = new Promise(res => {
-          if (video.readyState >= 3) res();
-          else video.addEventListener('canplay', res, { once: true });
+
+        const play = () => {
+          if (hero.classList.contains('is-ended')) return;
+          const r = video.play();
+          if (r && r.catch) r.catch(() => { offer(); armGesture(); });
+        };
+
+        // Ждём только паузу «на фотографию». Ждать canplay нельзя: Safari не
+        // догружает медиа заранее, событие может не прийти вовсе — и ролик
+        // тогда не запускался никогда.
+        setTimeout(() => { if (REDUCED) offer(); else play(); }, INTRO);
+        if (btn) btn.addEventListener('click', () => {
+          hero.classList.remove('is-offered', 'is-ended');
+          video.currentTime = 0;
+          play();
         });
-        Promise.all([ready, new Promise(r => setTimeout(r, INTRO))]).then(start);
 
         const showAt = t => {
           const d = video.duration || 8;
@@ -209,11 +233,10 @@
 
         // Не тратим декодер, пока экран не виден; после конца ролика не перезапускаем
         new IntersectionObserver(es => es.forEach(e => {
-          if (!started || hero.classList.contains('is-ended')) return;
-          if (e.isIntersecting) video.play().catch(() => {}); else video.pause();
+          if (!hero.classList.contains('is-playing')) return;
+          if (hero.classList.contains('is-ended')) return;
+          if (e.isIntersecting) play(); else video.pause();
         }), { rootMargin: '0px' }).observe(video);
-
-        if (REDUCED) hero.classList.add('is-ready');   // остаётся одна фотография
 
         // Текст hero остаётся обычным содержимым экрана — гасить его нечем и незачем
         onScroll(() => { if (bar) bar.style.width = '0%'; });

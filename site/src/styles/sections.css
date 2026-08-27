@@ -35,6 +35,33 @@
 }
 .hero[data-playback="once"].is-playing .hero__video,
 .hero[data-playback="loop"].is-playing .hero__video { opacity: 1; }
+
+/* Кнопка запуска — на случай, когда браузер запретил автозапуск или включён
+   reduced-motion. Без неё «не играет» выглядело бы как поломка. */
+.hero__play {
+  position: absolute; left: 50%; top: 50%; z-index: 5;
+  transform: translate(-50%, -50%) scale(.96);
+  display: inline-flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-3) var(--s-5);
+  border: 1px solid rgba(246, 243, 239, .28); border-radius: 999px;
+  background: rgba(11, 10, 9, .58); color: var(--milk);
+  font: inherit; font-size: var(--t-sm); letter-spacing: .04em;
+  cursor: pointer; opacity: 0; visibility: hidden;
+  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out),
+              border-color 220ms var(--ease-out), visibility 0s linear 420ms;
+}
+.hero.is-offered .hero__play {
+  opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1);
+  transition-delay: 0s;
+}
+.hero.is-playing .hero__play { opacity: 0; visibility: hidden; }
+.hero__play:hover { border-color: var(--accent); }
+.hero__play:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.hero__play-i {
+  width: 0; height: 0; margin-left: 2px;
+  border-left: 9px solid var(--accent);
+  border-top: 6px solid transparent; border-bottom: 6px solid transparent;
+}
 .hero__stage::after { content: ""; position: absolute; inset: 0; background: var(--scrim); }
 
 .hero__content {
