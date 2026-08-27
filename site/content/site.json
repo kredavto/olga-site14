@@ -123,25 +123,25 @@
         "n": "01",
         "title": "Индивидуальный проект",
         "text": "Проектируем от архитектуры помещения, а не от готовых модулей.",
-        "image": "media/proj-p01-wide.jpg"
+        "image": "media/usp-01-project.jpg"
       },
       {
         "n": "02",
         "title": "Премиальные материалы",
         "text": "Шпон, камень, эмаль и фурнитура европейских фабрик.",
-        "image": "media/mat-veneer.jpg"
+        "image": "media/usp-02-materials.jpg"
       },
       {
         "n": "03",
         "title": "Собственное производство",
         "text": "Полный цикл в одном цехе — от раскроя до контроля качества.",
-        "image": "media/prod-03-finishing.jpg"
+        "image": "media/usp-03-production.jpg"
       },
       {
         "n": "04",
         "title": "Монтаж под ключ",
         "text": "Одна бригада, один срок, одна зона ответственности.",
-        "image": "media/prod-06-install.jpg"
+        "image": "media/usp-04-install.jpg"
       }
     ]
   },
