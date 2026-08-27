@@ -109,7 +109,9 @@
         "ty": 72
       }
     ],
-    "poster": "https://images.unsplash.com/photo-1558442074-3c19857bc1dc?auto=format&w=1600&q=80"
+    "poster": "https://images.unsplash.com/photo-1558442074-3c19857bc1dc?auto=format&w=1600&q=80",
+    "posterFallback": "media/hero-00.jpg",
+    "playback": "once"
   },
   "usp": {
     "statement": [

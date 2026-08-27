@@ -61,10 +61,11 @@
 </div>
 <main>
 
-<section class="hero grain" id="top" data-hero="{&quot;video&quot;:&quot;media/hero.mp4&quot;,&quot;frames&quot;:{&quot;pattern&quot;:&quot;media/hero-{i}.jpg&quot;,&quot;count&quot;:40,&quot;pad&quot;:2}}">
+<section class="hero grain" id="top" data-hero="{&quot;video&quot;:&quot;media/hero.mp4&quot;,&quot;frames&quot;:{&quot;pattern&quot;:&quot;media/hero-{i}.jpg&quot;,&quot;count&quot;:40,&quot;pad&quot;:2},&quot;playback&quot;:&quot;once&quot;}" data-playback="once">
   <div class="hero__pin">
-    <div class="hero__stage"><video class="hero__video" playsinline muted preload="auto"
-              poster="https://images.unsplash.com/photo-1558442074-3c19857bc1dc?auto=format&amp;w=1600&amp;q=80"
+    <div class="hero__stage"><img class="hero__poster" src="https://images.unsplash.com/photo-1558442074-3c19857bc1dc?auto=format&amp;w=1600&amp;q=80" alt="" aria-hidden="true"
+            data-fallback="media/hero-00.jpg">
+       <video class="hero__video" playsinline muted preload="auto" poster="https://images.unsplash.com/photo-1558442074-3c19857bc1dc?auto=format&amp;w=1600&amp;q=80"
               data-src="media/hero.mp4" data-src-mobile="media/hero-mobile.mp4"></video></div>
 
     <div class="hero__annos" aria-hidden="true">
@@ -107,7 +108,7 @@
       <span class="label">Scroll to explore</span>
       <span class="hero__line"></span>
     </div>
-    <div class="hero__progress" aria-hidden="true"><i></i></div>
+    
   </div>
 </section>
 

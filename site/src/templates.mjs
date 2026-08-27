@@ -65,16 +65,21 @@ export const header = d => `
 /* ------------------------------------------------------------------ 01 hero */
 export const hero = d => {
   const h = d.hero;
-  const cfg = attr({ video: h.video, frames: h.frames });
+  const cfg = attr({ video: h.video, frames: h.frames, playback: h.playback || 'scrub' });
   // Источник выбирается в JS по ширине экрана: <source media> для этого
   // ненадёжен, а мобильному нужен свой, лёгкий файл.
+  // Постер лежит отдельным слоем под видео: при загрузке страницы первой
+  // появляется фотография, и только затем поверх неё проявляется видео.
+  const poster = esc(h.poster || h.frames.pattern.replace('{i}', '00'));
+  const posterFb = esc(h.posterFallback || h.frames.pattern.replace('{i}', '00'));
   const stage = h.video
-    ? `<video class="hero__video" playsinline muted preload="auto"
-              poster="${esc(h.poster || h.frames.pattern.replace('{i}', '00'))}"
+    ? `<img class="hero__poster" src="${poster}" alt="" aria-hidden="true"
+            data-fallback="${posterFb}">
+       <video class="hero__video" playsinline muted preload="auto" poster="${poster}"
               data-src="${esc(h.video)}" data-src-mobile="${esc(h.videoMobile || h.video)}"></video>`
     : `<canvas class="hero__canvas" aria-hidden="true"></canvas>`;
   return `
-<section class="hero grain" id="top" data-hero="${cfg}">
+<section class="hero grain" id="top" data-hero="${cfg}" data-playback="${esc(h.video ? (h.playback || 'scrub') : 'scrub')}">
   <div class="hero__pin">
     <div class="hero__stage">${stage}</div>
 
@@ -102,7 +107,7 @@ export const hero = d => {
       <span class="label">${esc(h.scrollHint)}</span>
       <span class="hero__line"></span>
     </div>
-    <div class="hero__progress" aria-hidden="true"><i></i></div>
+    ${h.playback === 'scrub' || !h.video ? '<div class="hero__progress" aria-hidden="true"><i></i></div>' : ''}
   </div>
 </section>`;
 };

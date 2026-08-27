@@ -172,6 +172,52 @@
       // Лёгкий файл на узких экранах — иначе мобильный тянет десктопный битрейт
       video.src = matchMedia('(max-width: 720px)').matches && video.dataset.srcMobile
         ? video.dataset.srcMobile : video.dataset.src;
+
+      if (cfg.playback !== 'scrub') {
+        // Сначала показываем фотографию-постер, затем поверх неё проявляется видео.
+        // Подписи следуют за временем ролика, а не за скроллом.
+        const INTRO = 1400;                       // сколько держим фотографию до старта
+        hero.classList.add('is-ready');           // постер появляется сразу
+        if (cfg.playback === 'loop') video.loop = true;
+
+        let started = false;
+        const start = () => {
+          if (started || REDUCED) return;
+          started = true;
+          hero.classList.add('is-playing');
+          video.play().catch(() => { hero.classList.remove('is-playing'); });
+        };
+        // Ждём и паузу на «показ фотографии», и готовность ролика — что дольше
+        const ready = new Promise(res => {
+          if (video.readyState >= 3) res();
+          else video.addEventListener('canplay', res, { once: true });
+        });
+        Promise.all([ready, new Promise(r => setTimeout(r, INTRO))]).then(start);
+
+        const showAt = t => {
+          const d = video.duration || 8;
+          annos.forEach(a => {
+            const from = +a.dataset.at * d;
+            a.classList.toggle('is-on', t >= from && t < from + 2.4);
+          });
+        };
+        video.addEventListener('timeupdate', () => showAt(video.currentTime));
+        video.addEventListener('ended', () => {
+          hero.classList.add('is-ended');         // остаётся последний кадр
+          annos.forEach(a => a.classList.remove('is-on'));
+        });
+
+        // Не тратим декодер, пока экран не виден; после конца ролика не перезапускаем
+        new IntersectionObserver(es => es.forEach(e => {
+          if (!started || hero.classList.contains('is-ended')) return;
+          if (e.isIntersecting) video.play().catch(() => {}); else video.pause();
+        }), { rootMargin: '0px' }).observe(video);
+
+        if (REDUCED) hero.classList.add('is-ready');   // остаётся одна фотография
+
+        // Текст hero остаётся обычным содержимым экрана — гасить его нечем и незачем
+        onScroll(() => { if (bar) bar.style.width = '0%'; });
+      } else {
       video.addEventListener('loadedmetadata', () => hero.classList.add('is-ready'), { once: true });
 
       // Перемотка идёт в такт кадрам браузера: подряд идущие события скролла
@@ -187,6 +233,7 @@
         if (!seeking) { seeking = true; requestAnimationFrame(seek); }
         paint(progress);
       });
+      }
     } else if (canvas && cfg.frames) {
       const ctx = canvas.getContext('2d', { alpha: false });
       const { pattern, count, pad } = cfg.frames;

@@ -3,13 +3,38 @@
 /* ============================================================ 01 HERO */
 .hero { position: relative; height: 460svh; }   /* длина = дистанция скраба видео */
 .hero__pin { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+/* Видео играет само — растягивать hero на несколько экранов незачем */
+.hero[data-playback="once"], .hero[data-playback="loop"] { height: 100svh; }
+.hero[data-playback="once"] .hero__pin,
+.hero[data-playback="loop"] .hero__pin { position: relative; }
+
+/* Порядок показа: сначала фотография-постер, затем поверх неё проявляется видео.
+   Постер остаётся нижним слоем — он же прикрывает паузу на загрузку ролика. */
+.hero__poster {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transform: scale(1.06);
+  transition: opacity 1400ms var(--ease-out), transform 2400ms var(--ease-out);
+}
+.hero.is-ready .hero__poster { opacity: 1; transform: scale(1); }
+
 .hero__stage { position: absolute; inset: 0; z-index: 0; background: var(--g-1000); }
 .hero__canvas, .hero__video {
   width: 100%; height: 100%; object-fit: cover;
   opacity: 0; transform: scale(1.06);
   transition: opacity 1600ms var(--ease-out), transform 2400ms var(--ease-out);
 }
-.hero.is-ready .hero__canvas, .hero.is-ready .hero__video { opacity: 1; transform: scale(1); }
+.hero.is-ready .hero__canvas,
+.hero.is-ready[data-playback="scrub"] .hero__video { opacity: 1; transform: scale(1); }
+
+/* Режим «ролик»: видео лежит поверх постера и прозрачно, пока не начнётся
+   воспроизведение — иначе первый кадр ролика перекрыл бы фотографию сразу. */
+.hero[data-playback="once"] .hero__video,
+.hero[data-playback="loop"] .hero__video {
+  position: relative; z-index: 1; opacity: 0; transform: none;
+  transition: opacity 1200ms var(--ease-out);
+}
+.hero[data-playback="once"].is-playing .hero__video,
+.hero[data-playback="loop"].is-playing .hero__video { opacity: 1; }
 .hero__stage::after { content: ""; position: absolute; inset: 0; background: var(--scrim); }
 
 .hero__content {
