@@ -222,7 +222,7 @@ export const caseStudy = d => {
   <div class="case__pin">
     <div class="case__frame">
       ${c.video
-        ? `<video class="case__video" playsinline muted loop preload="metadata"
+        ? `<video class="case__video" playsinline muted loop preload="auto"
                   poster="${esc(c.poster || c.image)}"
                   data-src="${esc(c.video)}" data-src-mobile="${esc(c.videoMobile || c.video)}"
                   aria-label="${esc(c.title)}"></video>`

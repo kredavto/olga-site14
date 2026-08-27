@@ -493,10 +493,25 @@
     if (REDUCED) {
       caseVideo.removeAttribute('loop');      // при reduced-motion остаётся постер
     } else {
+      let armed = false;
+      const playCase = () => {
+        const r = caseVideo.play();
+        // Отказ нельзя глотать: без второй попытки секция навсегда остаётся
+        // на постере. Ждём первого действия пользователя и пробуем снова.
+        if (r && r.catch) r.catch(() => {
+          if (armed) return;
+          armed = true;
+          ['pointerdown', 'keydown', 'touchstart', 'wheel'].forEach(t =>
+            addEventListener(t, () => caseVideo.play().catch(() => {}),
+                             { once: true, passive: true }));
+        });
+      };
+      // Запас в пол-экрана: ролик начинает играть до того, как секция дошла
+      // до глаз, иначе на небыстром канале он не успевает стартовать за то
+      // время, что секция видна.
       new IntersectionObserver(es => es.forEach(e => {
-        if (e.isIntersecting) caseVideo.play().catch(() => {});
-        else caseVideo.pause();
-      }), { rootMargin: '10% 0px' }).observe(caseVideo);
+        if (e.isIntersecting) playCase(); else caseVideo.pause();
+      }), { rootMargin: '50% 0px' }).observe(caseVideo);
     }
   }
 

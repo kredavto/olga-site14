@@ -22,6 +22,7 @@
 <video id="v" playsinline muted preload="auto"></video>
 <script>
 const SRC = 'media/hero.mp4';
+const SRC2 = 'media/case-01.mp4';
 const rows = [];
 const t = document.getElementById('t');
 const put = (k, v, cls) => { rows.push([k, v, cls || '']); render(); };
@@ -69,6 +70,34 @@ attempt('автозапуск');
 document.getElementById('go').addEventListener('click', () => {
   set('запуск по клику', 'пробуем…', 'warn'); attempt('запуск по клику');
 });
+// Второй ролик — фон кейса «Квартира 128 м²». Он тоже автозапускается,
+// но только когда секция подходит к экрану, поэтому проверяем отдельно.
+const v2 = document.createElement('video');
+v2.playsInline = true; v2.muted = true; v2.preload = 'auto';
+fetch(SRC2, { method: 'GET', headers: { Range: 'bytes=0-99' } })
+  .then(r => set('файл ' + SRC2, r.status + ' ' + r.statusText + ' · ' +
+        (r.headers.get('content-type') || 'без типа'), r.ok ? 'ok' : 'bad'))
+  .catch(e => set('файл ' + SRC2, 'запрос не прошёл: ' + e.message, 'bad'));
+['loadedmetadata', 'canplay', 'playing', 'error'].forEach(ev =>
+  v2.addEventListener(ev, () => set('кейс: событие ' + ev,
+    'пришло через ' + Math.round(performance.now()) + ' мс', ev === 'error' ? 'bad' : 'ok')));
+v2.addEventListener('error', () => set('кейс: код ошибки',
+  (v2.error && v2.error.code) + ' · ' + (v2.error && v2.error.message || '—'), 'bad'));
+v2.src = SRC2;
+{
+  const r = v2.play();
+  if (r && r.then) {
+    let settled = false;
+    r.then(() => { settled = true; set('кейс: автозапуск', 'запустился', 'ok'); })
+     .catch(e => { settled = true; set('кейс: автозапуск', 'отказ: ' + e.name, 'bad'); });
+    setTimeout(() => { if (!settled)
+      set('кейс: автозапуск', 'обещание висит без ответа', 'bad'); }, 8000);
+  }
+}
+setInterval(() => set('кейс: состояние', 'readyState ' + v2.readyState +
+  ' · ' + (v2.paused ? 'на паузе' : 'играет') + ' · время ' + v2.currentTime.toFixed(2) +
+  ' · загружено ' + (v2.buffered.length ? v2.buffered.end(0).toFixed(1) + ' с' : '0')), 500);
+
 setInterval(() => {
   set('состояние', 'readyState ' + v.readyState + ' · networkState ' + v.networkState +
       ' · ' + (v.paused ? 'на паузе' : 'играет') + ' · время ' + v.currentTime.toFixed(2) +
