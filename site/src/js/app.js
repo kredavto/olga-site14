@@ -222,6 +222,11 @@
           if (REDUCED) { offer(); return; }   // источник подключит кнопка
           attach();
           play();
+          // Сторож. play() может не вернуть ни успеха, ни отказа: обещание
+          // остаётся висеть, если медиа так и не подготовилось. Тогда не
+          // срабатывает ни ветка отказа, ни error — и экран остаётся без
+          // ролика и без объяснений. Через 6 с показываем кнопку.
+          setTimeout(() => { if (!hero.classList.contains('is-playing')) offer(); }, 6000);
         }, INTRO);
         if (btn) btn.addEventListener('click', () => {
           hero.classList.remove('is-offered', 'is-ended');

@@ -1,0 +1,77 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Проверка видео — OLGA</title>
+<style>
+  body { margin: 0; padding: 24px; background: #0B0A09; color: #F6F3EF;
+         font: 15px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  h1 { font-size: 17px; margin: 0 0 4px; }
+  p.note { color: #9A938B; margin: 0 0 20px; }
+  table { border-collapse: collapse; width: 100%; max-width: 760px; }
+  td { padding: 6px 10px 6px 0; vertical-align: top; border-bottom: 1px solid #221F1C; }
+  td:first-child { color: #9A938B; white-space: nowrap; width: 42%; }
+  .ok { color: #7FBF8F; } .bad { color: #E08A7A; } .warn { color: #D8B27C; }
+  video { width: 100%; max-width: 760px; margin-top: 20px; background: #17140F; }
+  button { margin-top: 16px; padding: 10px 18px; border-radius: 999px; cursor: pointer;
+           border: 1px solid #D8B27C; background: transparent; color: #F6F3EF; font: inherit; }
+</style>
+<h1>Проверка воспроизведения ролика</h1>
+<p class="note">Откройте эту страницу и пришлите снимок экрана — по нему видно, где именно обрывается запуск.</p>
+<table id="t"></table>
+<button id="go">Запустить вручную</button>
+<video id="v" playsinline muted preload="auto"></video>
+<script>
+const SRC = 'media/hero.mp4';
+const rows = [];
+const t = document.getElementById('t');
+const put = (k, v, cls) => { rows.push([k, v, cls || '']); render(); };
+const set = (k, v, cls) => {
+  const r = rows.find(r => r[0] === k);
+  if (r) { r[1] = v; r[2] = cls || ''; } else rows.push([k, v, cls || '']);
+  render();
+};
+const render = () => {
+  t.innerHTML = rows.map(([k, v, c]) =>
+    `<tr><td>${k}</td><td class="${c}">${String(v)}</td></tr>`).join('');
+};
+const v = document.getElementById('v');
+
+put('браузер', navigator.userAgent);
+put('reduced-motion', matchMedia('(prefers-reduced-motion: reduce)').matches ? 'включён' : 'выключен',
+    matchMedia('(prefers-reduced-motion: reduce)').matches ? 'warn' : 'ok');
+put('поддержка H.264', v.canPlayType('video/mp4; codecs="avc1.42E01E"') || 'нет',
+    v.canPlayType('video/mp4; codecs="avc1.42E01E"') ? 'ok' : 'bad');
+
+fetch(SRC, { method: 'GET', headers: { Range: 'bytes=0-99' } })
+  .then(r => set('файл ' + SRC, r.status + ' ' + r.statusText + ' · ' +
+        (r.headers.get('content-type') || 'без типа'), r.ok ? 'ok' : 'bad'))
+  .catch(e => set('файл ' + SRC, 'запрос не прошёл: ' + e.message, 'bad'));
+
+['loadedmetadata', 'canplay', 'playing', 'stalled', 'suspend', 'waiting', 'error']
+  .forEach(ev => v.addEventListener(ev, () => set('событие ' + ev, 'пришло через ' +
+      Math.round(performance.now()) + ' мс', ev === 'error' ? 'bad' : 'ok')));
+
+v.addEventListener('error', () => set('код ошибки',
+  (v.error && v.error.code) + ' · ' + (v.error && v.error.message || '—'), 'bad'));
+
+v.src = SRC;
+const attempt = label => {
+  const r = v.play();
+  if (!r || !r.then) { set(label, 'play() без обещания (старый API)', 'warn'); return; }
+  let settled = false;
+  r.then(() => { settled = true; set(label, 'запустился', 'ok'); })
+   .catch(e => { settled = true; set(label, 'отказ: ' + e.name + ' — ' + e.message, 'bad'); });
+  setTimeout(() => { if (!settled)
+    set(label, 'обещание висит без ответа — медиа не подготовилось', 'bad'); }, 6000);
+};
+set('автозапуск', 'пробуем…', 'warn');
+attempt('автозапуск');
+document.getElementById('go').addEventListener('click', () => {
+  set('запуск по клику', 'пробуем…', 'warn'); attempt('запуск по клику');
+});
+setInterval(() => {
+  set('состояние', 'readyState ' + v.readyState + ' · networkState ' + v.networkState +
+      ' · ' + (v.paused ? 'на паузе' : 'играет') + ' · время ' + v.currentTime.toFixed(2) +
+      ' · загружено ' + (v.buffered.length ? v.buffered.end(0).toFixed(1) + ' с' : '0'));
+}, 500);
+</script>

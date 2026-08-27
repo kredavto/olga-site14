@@ -1,7 +1,8 @@
 /* OLGA — сборка статического сайта из content/site.json.
    Выход: dist/index.html + dist/assets/*. Медиа лежит в dist/media/.
    Запуск: node build.mjs   (без зависимостей) */
-import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, copyFile, readdir, unlink } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import * as T from './src/templates.mjs';
@@ -15,8 +16,22 @@ const css = (await Promise.all(
 const js = await readFile(join(root, 'src/js/app.js'), 'utf8');
 
 await mkdir(join(root, 'dist/assets'), { recursive: true });
-await writeFile(join(root, 'dist/assets/app.css'), css);
-await writeFile(join(root, 'dist/assets/app.js'), js);
+
+// Имя файла содержит хэш содержимого. Без этого браузер держал старые app.js
+// и app.css до часа (Cache-Control на /assets/*) и не видел выката — правка
+// уезжала на сервер, а посетитель продолжал выполнять прежний код.
+const stamp = t => createHash('sha256').update(t).digest('hex').slice(0, 8);
+const cssName = `app.${stamp(css)}.css`;
+const jsName  = `app.${stamp(js)}.js`;
+
+// Старые хэши убираем, иначе dist растёт с каждой сборкой
+for (const f of await readdir(join(root, 'dist/assets'))) {
+  if (/^app\.[0-9a-f]{8}\.(css|js)$/.test(f) && f !== cssName && f !== jsName) {
+    await unlink(join(root, 'dist/assets', f));
+  }
+}
+await writeFile(join(root, 'dist/assets', cssName), css);
+await writeFile(join(root, 'dist/assets', jsName), js);
 
 /* Разметка организации — для поиска и карточек */
 const ld = {
@@ -54,7 +69,7 @@ const html = `<!doctype html>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-tight-500-cyrillic.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-400-cyrillic.woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts.css">
-<link rel="stylesheet" href="assets/app.css">
+<link rel="stylesheet" href="assets/${cssName}">
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 </head>
 <body>
@@ -79,12 +94,16 @@ ${T.contacts(d)}
 </main>
 ${T.footer(d)}
 ${T.sheet(d)}
-<script src="assets/app.js" defer></script>
+<script src="assets/${jsName}" defer></script>
 </body>
 </html>
 `;
 
 await writeFile(join(root, 'dist/index.html'), html);
+
+// Страница самопроверки: показывает, на каком шаге обрывается запуск ролика
+// у конкретного посетителя. Открывается по адресу /check.
+await copyFile(join(root, 'src/check.html'), join(root, 'dist/check.html'));
 
 const base = d.meta.url.replace(/\/$/, '');
 await writeFile(join(root, 'dist/robots.txt'),
