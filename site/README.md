@@ -165,9 +165,7 @@ Unsplash, Pexels или ваш собственный CDN. Параметры Un
 | `catalog.items[1].image` | Каталог — Шкафы-купе | `sliding wardrobe interior` | 1400×1000 |
 | `catalog.items[2].image` | Каталог — Гардеробные | `walk-in closet interior` | 1400×1000 |
 | `catalog.items[3].image` | Каталог — Гостиные | `modern living room interior` | 1400×1000 |
-| `projects.items[0].images[0].src` | Проект 1 — общий план | `luxury apartment interior` | 1600×1000 |
-| `projects.items[0].images[1].src` | Проект 1 — вертикальный | `luxury apartment interior vertical` | 900×1350 |
-| `projects.items[0].images[2].src` | Проект 1 — деталь | `furniture detail macro` | 900×900 |
+| ~~`projects.items[0].images[*]`~~ | Проект 1 «Резиденция в Хамовниках» | заполнено: две ссылки Unsplash + `rep12.jpg` в деталь | 16:10 / 2:3 / 1:1 |
 | `projects.items[1].images[0].src` | Проект 2 — общий план | `minimal interior kitchen` | 1600×1000 |
 | `projects.items[1].images[1].src` | Проект 2 — вертикальный | `minimal interior kitchen vertical` | 900×1350 |
 | `projects.items[1].images[2].src` | Проект 2 — деталь | `furniture detail macro` | 900×900 |

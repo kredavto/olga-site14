@@ -238,14 +238,16 @@
         "type": "Кухня",
         "images": [
           {
-            "src": "media/proj-p01-wide.jpg",
+            "src": "https://images.unsplash.com/photo-1618296498428-475b880e5b0a?auto=format&w=1600&q=80",
             "role": "wide",
-            "alt": "Кухня-гостиная, общий план"
+            "alt": "Кухня-гостиная, общий план",
+            "fallback": "media/proj-p01-wide.jpg"
           },
           {
-            "src": "media/proj-p01-tall.jpg",
+            "src": "https://images.unsplash.com/photo-1723641278225-3a3bbabc1218?auto=format&w=1000&q=80",
             "role": "tall",
-            "alt": "Гардеробная, вертикальный кадр"
+            "alt": "Гардеробная, вертикальный кадр",
+            "fallback": "media/proj-p01-tall.jpg"
           },
           {
             "src": "media/proj-p01-detail.jpg",
