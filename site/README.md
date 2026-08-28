@@ -167,9 +167,7 @@ Unsplash, Pexels или ваш собственный CDN. Параметры Un
 | `catalog.items[3].image` | Каталог — Гостиные | `modern living room interior` | 1400×1000 |
 | ~~`projects.items[0].images[*]`~~ | Проект 1 «Резиденция в Хамовниках» | заполнено: две ссылки Unsplash + `rep12.jpg` в деталь | 16:10 / 2:3 / 1:1 |
 | ~~`projects.items[1].images[*]`~~ | Проект 2 «Квартира на Мосфильмовской» | заполнено: две ссылки Unsplash + `rep13.jpg` в деталь | 16:10 / 2:3 / 1:1 |
-| `projects.items[2].images[0].src` | Проект 3 — общий план | `contemporary living room` | 1600×1000 |
-| `projects.items[2].images[1].src` | Проект 3 — вертикальный | `contemporary living room vertical` | 900×1350 |
-| `projects.items[2].images[2].src` | Проект 3 — деталь | `furniture detail macro` | 900×900 |
+| ~~`projects.items[2].images[*]`~~ | Проект 3 «Дом в Барвихе» | заполнено: две ссылки Unsplash + `rep14.jpeg` в деталь | 21:9 / 2:3 / 1:1 |
 | `projects.items[3].images[0].src` | Проект 4 — общий план | `japandi interior` | 1600×1000 |
 | `projects.items[3].images[1].src` | Проект 4 — вертикальный | `japandi interior vertical` | 900×1350 |
 | `projects.items[3].images[2].src` | Проект 4 — деталь | `furniture detail macro` | 900×900 |
