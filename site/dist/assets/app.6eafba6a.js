@@ -405,7 +405,11 @@
           if (r.bottom < -200 || r.top > window.innerHeight + 200) continue;
           const p = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
           const depth = +img.dataset.depth || 1;
-          img.style.transform = `translate3d(0, ${(-p * 96 * depth).toFixed(2)}px, 0) scale(1.22)`;
+          // Сдвиг не должен превышать запас, который даёт scale(1.22): иначе
+          // кадр уезжает за рамку и снизу открывается фон секции.
+          const limit = r.height * 0.11;
+          const y = clamp(-p * 96 * depth, -limit, limit);
+          img.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) scale(1.22)`;
         }
       });
     }

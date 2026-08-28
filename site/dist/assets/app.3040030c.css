@@ -617,7 +617,13 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .pj--mirror .pj__b { grid-column: 3 / 6;  grid-row: 1; }
   .pj--mirror .pj__c { grid-column: 1 / 3;  grid-row: 1; }
   .pj--pano .pj__a { grid-column: 1 / 13; aspect-ratio: 21/9; }
-  .pj--pano .pj__b { grid-column: 1 / 5; }
+  /* Нижний кадр тянется вправо вплотную к «стыку материалов»; пропорцию
+     снимаем — высоту ряда задаёт квадратный кадр справа, иначе при двойной
+     ширине 2:3 сделало бы его вдвое выше соседа. */
+  .pj--pano .pj__b { grid-column: 1 / 9; aspect-ratio: auto; align-self: stretch; }
+  /* Снимок вынут из потока: иначе он навязывает рамке собственную пропорцию
+     и ряд вырастает втрое. Высоту ряда задаёт квадратный кадр справа. */
+  .pj--pano .pj__b img { position: absolute; inset: 0; }
   .pj--pano .pj__c { grid-column: 9 / 13; }
 }
 .gallery__empty { padding: var(--s-9) 0; color: var(--fg-muted); }
