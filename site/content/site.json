@@ -292,15 +292,15 @@
         "type": "Гостиная",
         "images": [
           {
-            "src": "https://images.unsplash.com/photo-1738229115082-b5647ffb3503?auto=format&w=2000&q=80",
+            "src": "https://images.unsplash.com/photo-1704040686413-2c607dbd2f06?auto=format&w=1200&q=80",
             "role": "pano",
-            "alt": "Панорама гостиной",
+            "alt": "Гардеробная с подсветкой",
             "fallback": "media/proj-p03-pano.jpg"
           },
           {
-            "src": "https://images.unsplash.com/photo-1704040686413-2c607dbd2f06?auto=format&w=1200&q=80",
+            "src": "https://images.unsplash.com/photo-1738229115082-b5647ffb3503?auto=format&w=2000&q=80",
             "role": "tall",
-            "alt": "Гардеробная с подсветкой",
+            "alt": "Панорама гостиной",
             "fallback": "media/proj-p03-tall.jpg"
           },
           {
