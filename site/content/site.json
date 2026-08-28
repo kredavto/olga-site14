@@ -265,14 +265,16 @@
         "type": "Гардеробная",
         "images": [
           {
-            "src": "media/proj-p02-wide.jpg",
+            "src": "https://images.unsplash.com/photo-1722942626030-864388d62b3d?auto=format&w=1600&q=80",
             "role": "wide",
-            "alt": "Кухня вдоль окна"
+            "alt": "Кухня вдоль окна",
+            "fallback": "media/proj-p02-wide.jpg"
           },
           {
-            "src": "media/proj-p02-tall.jpg",
+            "src": "https://plus.unsplash.com/premium_photo-1674815329029-6473c5a1b70f?auto=format&w=1000&q=80",
             "role": "tall",
-            "alt": "Стена фасадов"
+            "alt": "Стена фасадов",
+            "fallback": "media/proj-p02-tall.jpg"
           },
           {
             "src": "media/proj-p02-detail.jpg",
