@@ -47,7 +47,7 @@ const ld = {
   url: d.meta.url
 };
 
-const html = `<!doctype html>
+let html = `<!doctype html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
@@ -98,6 +98,21 @@ ${T.sheet(d)}
 </body>
 </html>
 `;
+
+// Каждому локальному медиа-адресу добавляем ?v=<хэш файла>. Без этого
+// Cache-Control: immutable на /media/* держал у посетителя прежнюю картинку
+// год: файл на сервере менялся, а в браузере оставался старый — замена фото
+// выглядела как «фото пропало».
+const mediaRe = /media\/([A-Za-z0-9._-]+\.(?:jpg|jpeg|png|webp|avif|mp4|webm))/g;
+const stamps = new Map();
+for (const [, name] of html.matchAll(mediaRe)) {
+  if (stamps.has(name)) continue;
+  try {
+    const buf = await readFile(join(root, 'dist/media', name));
+    stamps.set(name, createHash('sha256').update(buf).digest('hex').slice(0, 8));
+  } catch { stamps.set(name, null); }          // нет файла — адрес не трогаем
+}
+html = html.replace(mediaRe, (m, name) => stamps.get(name) ? `${m}?v=${stamps.get(name)}` : m);
 
 await writeFile(join(root, 'dist/index.html'), html);
 
