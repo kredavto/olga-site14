@@ -202,16 +202,13 @@
           "Все",
           "Modern",
           "Minimal",
-          "Contemporary",
-          "Neoclassic",
-          "Japandi"
+          "Contemporary"
         ]
       },
       "budget": {
         "label": "Бюджет",
         "options": [
           "Все",
-          "до 500 тыс.",
           "500 тыс. — 1 млн",
           "1—2 млн",
           "2 млн+"
@@ -223,8 +220,7 @@
           "Все",
           "Кухня",
           "Гардеробная",
-          "Гостиная",
-          "Шкафы"
+          "Гостиная"
         ]
       }
     },
@@ -313,31 +309,6 @@
           }
         ],
         "layout": "pano"
-      },
-      {
-        "id": "p04",
-        "title": "Апартаменты в Сити",
-        "meta": "74 м² · кухня + хранение",
-        "style": "Japandi",
-        "budget": "до 500 тыс.",
-        "type": "Шкафы",
-        "images": [
-          {
-            "src": "media/proj-p04-wide.jpg",
-            "role": "wide",
-            "alt": "Фронтальная стена хранения"
-          },
-          {
-            "src": "media/proj-p04-tall.jpg",
-            "role": "tall",
-            "alt": "Общий план"
-          },
-          {
-            "src": "media/proj-p04-detail.jpg",
-            "role": "detail",
-            "alt": "Подсветка полки, макро"
-          }
-        ]
       }
     ]
   },

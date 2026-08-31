@@ -159,15 +159,17 @@
 .catalog { background: var(--g-950); }
 .catalog__head { padding-bottom: var(--s-8); }
 .cat {
-  position: relative; display: block; height: 88svh; min-height: 460px; overflow: hidden;
+  position: relative; display: block; height: 100svh; min-height: 460px; overflow: hidden;
   border-top: 1px solid var(--line-soft);
 }
 .cat__media { position: absolute; inset: 0; overflow: hidden; background: var(--g-1000); }
 /* cover, чтобы кадр заполнял плитку по ширине — без тёмных полей по бокам.
-   Изображение чуть выше контейнера: это и уменьшает обрезку, и даёт запас,
-   внутри которого кадр может двигаться при скролле, не открывая краёв. */
-.cat__media img { position: absolute; left: 0; top: -8%;
-  width: 100%; height: 116%; object-fit: cover; object-position: center;
+   Запас по высоте сведён к 6%: при 16% снимок был увеличен заметно сильнее
+   необходимого и от кадра 3:2 оставалось около 71%. Вместе с более высокой
+   плиткой теперь видно ~88%. Запас нужен, чтобы кадр мог двигаться при
+   скролле, не открывая краёв, — амплитуда движения ограничена им же. */
+.cat__media img { position: absolute; left: 0; top: -3%;
+  width: 100%; height: 106%; object-fit: cover; object-position: center;
   will-change: transform; transition: filter var(--d-slow) var(--ease); }
 .cat::after {
   content: ""; position: absolute; inset: 0;

@@ -386,7 +386,9 @@
         // На мобильном плитка равна пропорции кадра, запаса нет — не двигаем.
         if (!narrow) {
           const im = $('.cat__media img', cat);
-          if (im) im.style.transform = `translate3d(0, ${(p * 44).toFixed(1)}px, 0)`;
+          // Амплитуда — внутри 3% запаса по высоте (см. sections.css): больше
+          // сдвинуть нельзя, иначе снизу или сверху откроется фон плитки.
+          if (im) im.style.transform = `translate3d(0, ${(p * 16).toFixed(1)}px, 0)`;
         }
         const title = $('.cat__title', cat);
         if (title) title.style.transform = `translate3d(0, ${(p * -58).toFixed(1)}px, 0)`;
