@@ -176,7 +176,10 @@ export const projects = d => {
         ${f.options.map((o, i) => `<button class="chip" type="button" data-value="${esc(o)}" aria-pressed="${i === 0}">${esc(o)}</button>`).join('')}
       </div>
     </div>`;
-  const shape = i => ['', 'pj--mirror', 'pj--pano', ''][i % 4];
+  // Раскладка карточки берётся из контента; без неё — чередование по порядку.
+  // Через поле, а не через индекс: иначе добавление проекта в середину
+  // перетасовало бы раскладки всех следующих.
+  const shape = (it, i) => it.layout ? `pj--${esc(it.layout)}` : ['', 'pj--mirror', 'pj--pano', ''][i % 4];
   return `
 <section class="projects section" id="projects" aria-labelledby="pj-title">
   <div class="wrap">
@@ -192,7 +195,7 @@ export const projects = d => {
 
     <div class="gallery">
       ${p.items.map((it, i) => `
-      <article class="pj ${shape(i)}" data-style="${esc(it.style)}" data-budget="${esc(it.budget)}" data-type="${esc(it.type)}">
+      <article class="pj ${shape(it, i)}" data-style="${esc(it.style)}" data-budget="${esc(it.budget)}" data-type="${esc(it.type)}">
         ${it.images.map((im, n) => `
         <figure class="pj__fig pj__${'abc'[n]} reveal">
           ${img(im.src, im.alt, { fallback: im.fallback, extra: `data-depth="${[1, 1.6, 2.2][n]}"` })}
