@@ -236,6 +236,9 @@
 .pj.is-out { opacity: 0; transform: scale(.97); pointer-events: none; }
 .pj__fig { position: relative; overflow: hidden; border-radius: var(--r-sm); background: var(--g-900); }
 .pj__fig img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+/* Кадр с fit: contain показывается целиком; по бокам остаётся фон рамки.
+   Параллакс к нему не применяется — сдвигать нечего, запаса нет. */
+.pj__fig img.is-contain { object-fit: contain; }
 .pj__fig figcaption {
   position: absolute; left: var(--s-4); bottom: var(--s-4);
   font-size: var(--t-label); text-transform: uppercase; letter-spacing: var(--ls-label);

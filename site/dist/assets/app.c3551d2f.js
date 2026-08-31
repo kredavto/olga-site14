@@ -401,6 +401,7 @@
       const figs = $$('.pj__fig img', gallery);
       onScroll(() => {
         for (const img of figs) {
+          if (img.classList.contains('is-contain')) continue;   // вписан целиком — двигать нечего
           const r = img.parentElement.getBoundingClientRect();
           if (r.bottom < -200 || r.top > window.innerHeight + 200) continue;
           const p = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;

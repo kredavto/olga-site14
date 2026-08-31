@@ -198,7 +198,7 @@ export const projects = d => {
       <article class="pj ${shape(it, i)}" data-style="${esc(it.style)}" data-budget="${esc(it.budget)}" data-type="${esc(it.type)}">
         ${it.images.map((im, n) => `
         <figure class="pj__fig pj__${'abc'[n]} reveal">
-          ${img(im.src, im.alt, { fallback: im.fallback, extra: `data-depth="${[1, 1.6, 2.2][n]}"` })}
+          ${img(im.src, im.alt, { fallback: im.fallback, cls: im.fit === 'contain' ? 'is-contain' : '', extra: `data-depth="${[1, 1.6, 2.2][n]}"` })}
           <figcaption>${esc(im.alt)}</figcaption>
         </figure>`).join('')}
         <div class="pj__meta">
