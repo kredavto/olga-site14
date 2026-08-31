@@ -159,10 +159,15 @@
 .catalog { background: var(--g-950); }
 .catalog__head { padding-bottom: var(--s-8); }
 .cat {
-  position: relative; display: block; height: 100svh; min-height: 460px; overflow: hidden;
+  position: relative; display: block; height: 74svh; min-height: 420px; overflow: hidden;
   border-top: 1px solid var(--line-soft);
 }
-.cat__media { position: absolute; inset: 0; overflow: hidden; background: var(--g-1000); }
+/* Кадр не доходит до краёв экрана и выровнен по текстовой колонке: во всю
+   ширину снимок приходилось увеличивать под ширину монитора, и интерьер
+   выглядел вплотную приближенным. Отступ по бокам + меньшая высота плитки
+   уменьшают снимок примерно до 84% прежней ширины и вдвое по площади. */
+.cat__media { position: absolute; inset: 0 clamp(20px, 8vw, 140px);
+  overflow: hidden; background: var(--g-1000); }
 /* cover, чтобы кадр заполнял плитку по ширине — без тёмных полей по бокам.
    Запас по высоте сведён к 6%: при 16% снимок был увеличен заметно сильнее
    необходимого и от кадра 3:2 оставалось около 71%. Вместе с более высокой
@@ -172,7 +177,7 @@
   width: 100%; height: 106%; object-fit: cover; object-position: center;
   will-change: transform; transition: filter var(--d-slow) var(--ease); }
 .cat::after {
-  content: ""; position: absolute; inset: 0;
+  content: ""; position: absolute; inset: 0 clamp(20px, 8vw, 140px);
   background: linear-gradient(180deg, rgba(7,7,6,.62), rgba(7,7,6,.10) 42%, rgba(7,7,6,.78));
   transition: background var(--d-slow) var(--ease);
 }
@@ -202,7 +207,7 @@
    Плитка во весь экран здесь оставляла бы вокруг снимка пустое поле. */
 @media (max-width: 720px) {
   .cat { height: auto; min-height: 0; display: flex; flex-direction: column; }
-  .cat__media { position: relative; inset: auto; aspect-ratio: 3 / 2; }
+  .cat__media { position: relative; inset: auto; aspect-ratio: 3 / 2; }   /* отступ по бокам здесь не нужен */
   .cat__media img { top: 0; height: 100%; }
   .cat::after { inset: 0 0 auto 0; height: 0; padding-bottom: 66.6667%; }
   .cat__in { height: auto; padding-block: var(--s-5) var(--s-7); gap: var(--s-4);
