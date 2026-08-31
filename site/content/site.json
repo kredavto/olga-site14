@@ -244,10 +244,10 @@
             "fallback": "media/proj-p01-wide.jpg"
           },
           {
-            "src": "https://images.unsplash.com/photo-1723641278225-3a3bbabc1218?auto=format&w=1000&q=80",
-            "role": "tall",
-            "alt": "Гардеробная, вертикальный кадр",
-            "fallback": "media/proj-p01-tall.jpg"
+            "src": "https://images.unsplash.com/photo-1672137233327-37b0c1049e77?auto=format&w=1600&q=80",
+            "role": "band",
+            "alt": "Гардеробная",
+            "fallback": "media/proj-p01-band.jpg"
           },
           {
             "src": "media/proj-p01-detail.jpg",
@@ -272,10 +272,10 @@
             "fallback": "media/proj-p02-wide.jpg"
           },
           {
-            "src": "https://plus.unsplash.com/premium_photo-1674815329029-6473c5a1b70f?auto=format&w=1000&q=80",
-            "role": "tall",
+            "src": "https://images.unsplash.com/photo-1640357154220-9775b0f31dec?auto=format&w=1600&q=80",
+            "role": "band",
             "alt": "Стена фасадов",
-            "fallback": "media/proj-p02-tall.jpg"
+            "fallback": "media/proj-p02-band.jpg"
           },
           {
             "src": "media/proj-p02-detail.jpg",
@@ -301,9 +301,9 @@
           },
           {
             "src": "https://images.unsplash.com/photo-1738229115082-b5647ffb3503?auto=format&w=2000&q=80",
-            "role": "tall",
+            "role": "band",
             "alt": "Гардеробная с подсветкой",
-            "fallback": "media/proj-p03-tall.jpg"
+            "fallback": "media/proj-p03-band.jpg"
           },
           {
             "src": "media/proj-p03-detail.jpg",
