@@ -567,44 +567,46 @@
     ],
     "items": [
       {
-        "image": "media/mat-veneer.jpg",
+        "image": "https://plus.unsplash.com/premium_photo-1675695700408-ca54e14503a3?auto=format&w=1200&q=80",
         "label": "Натуральный шпон",
-        "sub": "Дуб, орех, эвкалипт"
+        "sub": "Дуб, орех, эвкалипт",
+        "fallback": "media/mat-veneer.jpg"
       },
       {
-        "image": "media/mat-enamel.jpg",
+        "image": "https://plus.unsplash.com/premium_photo-1754670056423-320d38bdb7b8?auto=format&w=1600&q=80",
         "label": "Premium matt",
-        "sub": "Эмаль 7 слоёв"
+        "sub": "Эмаль 7 слоёв",
+        "fallback": "media/mat-enamel.jpg"
       },
       {
-        "image": "media/mat-stone.jpg",
+        "image": "https://images.unsplash.com/photo-1661065675380-e98f6b0cb342?auto=format&w=1600&q=80",
         "label": "Камень",
-        "sub": "Кварц, агломерат"
+        "sub": "Кварц, агломерат",
+        "fallback": "media/mat-stone.jpg"
       },
       {
-        "image": "media/mat-metal.jpg",
+        "image": "https://images.unsplash.com/photo-1545873509-33e944ca7655?auto=format&w=1600&q=80",
         "label": "Металл",
-        "sub": "Латунь, брашированный алюминий"
+        "sub": "Латунь, брашированный алюминий",
+        "fallback": "media/mat-metal.jpg"
       },
       {
-        "image": "media/mat-hardware.jpg",
-        "label": "Hidden hardware",
-        "sub": "Blum, Hettich, Salice"
-      },
-      {
-        "image": "media/mat-oak.jpg",
+        "image": "https://plus.unsplash.com/premium_photo-1672084195140-964307f606e2?auto=format&w=1600&q=80",
         "label": "Массив дуба",
-        "sub": "Отбор по текстуре"
+        "sub": "Отбор по текстуре",
+        "fallback": "media/mat-oak.jpg"
       },
       {
-        "image": "media/mat-marble.jpg",
+        "image": "https://plus.unsplash.com/premium_photo-1671118662228-bccf56c9569f?auto=format&w=1600&q=80",
         "label": "Мрамор",
-        "sub": "Книжная раскладка"
+        "sub": "Книжная раскладка",
+        "fallback": "media/mat-marble.jpg"
       },
       {
-        "image": "media/mat-textile.jpg",
+        "image": "https://images.unsplash.com/photo-1659767849003-82d972fac6b4?auto=format&w=1600&q=80",
         "label": "Текстиль",
-        "sub": "Обивка ниш и фасадов"
+        "sub": "Обивка ниш и фасадов",
+        "fallback": "media/mat-textile.jpg"
       }
     ]
   },
