@@ -243,8 +243,7 @@
             "src": "https://images.unsplash.com/photo-1672137233327-37b0c1049e77?auto=format&w=1600&q=80",
             "role": "band",
             "alt": "Гардеробная",
-            "fallback": "media/proj-p01-band.jpg",
-            "fit": "contain"
+            "fallback": "media/proj-p01-band.jpg"
           },
           {
             "src": "media/proj-p01-detail.jpg",
