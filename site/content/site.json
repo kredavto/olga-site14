@@ -660,22 +660,19 @@
         "n": "02",
         "title": "Раскрой",
         "text": "ЧПУ с точностью 0,1 мм.",
-        "image": "https://images.unsplash.com/premium_photo-1779559853801-b79cd9ded750?auto=format&w=2000&q=80",
-        "fallback": "media/prod-02-cutting.jpg"
+        "image": "media/prod-02-cutting.jpg"
       },
       {
         "n": "03",
         "title": "Обработка",
         "text": "Кромка, шлифовка, покраска в камере.",
-        "image": "https://images.unsplash.com/premium_photo-1745313739549-92b02873a538?auto=format&w=2000&q=80",
-        "fallback": "media/prod-03-finishing.jpg"
+        "image": "media/prod-03-finishing.jpg"
       },
       {
         "n": "04",
         "title": "Сборка",
         "text": "Предсборка каждого модуля в цехе.",
-        "image": "https://images.unsplash.com/premium_photo-1677151139298-e8f0cd8a8358?auto=format&w=2000&q=80",
-        "fallback": "media/prod-04-assembly.jpg"
+        "image": "media/prod-04-assembly.jpg"
       },
       {
         "n": "05",
