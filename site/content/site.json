@@ -734,7 +734,8 @@
       "name": "Анна К.",
       "city": "Москва",
       "project": "кухня + гостиная",
-      "image": "media/review-01.jpg"
+      "image": "https://images.unsplash.com/photo-1671197244266-73129c97c096?auto=format&w=2000&q=80",
+      "fallback": "media/review-01.jpg"
     },
     {
       "rating": 5,
@@ -742,7 +743,8 @@
       "name": "Дмитрий С.",
       "city": "Москва",
       "project": "гардеробная",
-      "image": "media/review-02.jpg"
+      "image": "https://images.unsplash.com/photo-1649361811423-a55616f7ab11?auto=format&w=2000&q=80",
+      "fallback": "media/review-02.jpg"
     },
     {
       "rating": 5,
@@ -750,7 +752,8 @@
       "name": "Марина Л.",
       "city": "Красногорск",
       "project": "шкафы + прихожая",
-      "image": "media/review-03.jpg"
+      "image": "https://images.unsplash.com/photo-1723641278225-3a3bbabc1218?auto=format&w=2000&q=80",
+      "fallback": "media/review-03.jpg"
     }
   ],
   "process": {
