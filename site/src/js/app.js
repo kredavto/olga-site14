@@ -396,7 +396,7 @@
     });
   }
 
-  /* ---------------------------------------------------------- 04 ПРОЕКТЫ: parallax + фильтр */
+  /* ---------------------------------------------------------- 04 ПРОЕКТЫ: parallax */
   const gallery = $('.gallery');
   if (gallery) {
     if (!REDUCED) {
@@ -416,43 +416,6 @@
         }
       });
     }
-
-    const state = { style: 'Все', budget: 'Все', type: 'Все' };
-    const cards = $$('.pj', gallery);
-    const count = $('.filters__count');
-    const empty = $('.gallery__empty');
-
-    const apply = () => {
-      let shown = 0;
-      cards.forEach((c, i) => {
-        const ok = (state.style === 'Все' || c.dataset.style === state.style)
-                && (state.budget === 'Все' || c.dataset.budget === state.budget)
-                && (state.type === 'Все' || c.dataset.type === state.type);
-        c.classList.toggle('is-out', !ok);
-        if (ok) {
-          shown++;
-          c.style.transitionDelay = (shown * 70) + 'ms';   // staggered reveal
-          c.hidden = false;
-        } else {
-          c.style.transitionDelay = '0ms';
-          setTimeout(() => { if (c.classList.contains('is-out')) c.hidden = true; }, 420);
-        }
-      });
-      if (count) count.textContent = shown === 0 ? 'Ничего не найдено'
-        : `${shown} ${shown === 1 ? 'проект' : shown < 5 ? 'проекта' : 'проектов'}`;
-      if (empty) empty.hidden = shown !== 0;
-      request();
-    };
-
-    $$('.filter').forEach(f => {
-      const key = f.dataset.filter;
-      $$('.chip', f).forEach(chip => chip.addEventListener('click', () => {
-        $$('.chip', f).forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
-        state[key] = chip.dataset.value;
-        apply();
-      }));
-    });
-    apply();
   }
 
   /* ---------------------------------------------------------- 05 CASE STUDY */

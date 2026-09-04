@@ -169,13 +169,6 @@ export const catalog = d => `
 /* ------------------------------------------------------------------ 04 projects */
 export const projects = d => {
   const p = d.projects;
-  const filter = (key, f) => `
-    <div class="filter" data-filter="${key}">
-      <span class="label filter__label">${esc(f.label)}</span>
-      <div class="filter__opts" role="group" aria-label="${esc(f.label)}">
-        ${f.options.map((o, i) => `<button class="chip" type="button" data-value="${esc(o)}" aria-pressed="${i === 0}">${esc(o)}</button>`).join('')}
-      </div>
-    </div>`;
   // Раскладка карточки берётся из контента; без неё — чередование по порядку.
   // Через поле, а не через индекс: иначе добавление проекта в середину
   // перетасовало бы раскладки всех следующих.
@@ -188,14 +181,9 @@ export const projects = d => {
       <h2 class="h-1" id="pj-title">${lines(p.title)}</h2>
     </div>
 
-    <div class="filters">
-      ${Object.entries(p.filters).map(([k, f]) => filter(k, f)).join('')}
-      <p class="filters__count" role="status" aria-live="polite"></p>
-    </div>
-
     <div class="gallery">
       ${p.items.map((it, i) => `
-      <article class="pj ${shape(it, i)}" data-style="${esc(it.style)}" data-budget="${esc(it.budget)}" data-type="${esc(it.type)}">
+      <article class="pj ${shape(it, i)}">
         ${it.images.map((im, n) => `
         <figure class="pj__fig pj__${'abc'[n]} reveal">
           ${img(im.src, im.alt, { fallback: im.fallback, cls: im.fit === 'contain' ? 'is-contain' : '', extra: `data-depth="${[1, 1.6, 2.2][n]}"` })}
@@ -211,7 +199,6 @@ export const projects = d => {
           </span>
         </div>
       </article>`).join('')}
-      <p class="gallery__empty" hidden>Под выбранные параметры проектов пока нет. Снимите один из фильтров.</p>
     </div>
   </div>
 </section>`;

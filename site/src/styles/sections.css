@@ -216,31 +216,14 @@
   .cat__title { font-size: clamp(1.5rem, 7vw, 2.25rem); }
 }
 
-/* ============================================================ 04 ПРОЕКТЫ — editorial + фильтр */
+/* ============================================================ 04 ПРОЕКТЫ — editorial */
 .projects { background: var(--g-1000); }
-.filters { display: flex; flex-direction: column; gap: var(--s-4); padding-block: var(--s-6) var(--s-8);
-  border-block: 1px solid var(--line-soft); }
-.filter { display: flex; align-items: center; gap: var(--s-4); }
-.filter__label { flex: 0 0 auto; min-width: 76px; }
-.filter__opts { display: flex; gap: var(--s-2); overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
-.filter__opts::-webkit-scrollbar { display: none; }
-.chip {
-  flex: 0 0 auto; padding: 9px 16px; border-radius: var(--r-pill);
-  border: 1px solid var(--line); background: transparent; color: var(--milk-dim);
-  font-size: var(--t-sm); cursor: pointer; white-space: nowrap;
-  transition: color var(--d-fast) var(--ease), border-color var(--d-fast) var(--ease), background var(--d-fast) var(--ease);
-}
-.chip:hover { color: var(--milk); border-color: var(--line-hard); }
-.chip[aria-pressed="true"] { color: var(--g-1000); background: var(--milk); border-color: var(--milk); }
-.filters__count { color: var(--fg-muted); font-size: var(--t-sm); }
-
 .gallery { display: flex; flex-direction: column; gap: var(--s-10); padding-top: var(--s-9); }
 .pj {
   display: grid; gap: var(--s-4);
   grid-template-columns: 1fr;
   transition: opacity var(--d-base) var(--ease), transform var(--d-base) var(--ease);
 }
-.pj.is-out { opacity: 0; transform: scale(.97); pointer-events: none; }
 .pj__fig { position: relative; overflow: hidden; border-radius: var(--r-sm); background: var(--g-900); }
 .pj__fig img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
 /* Кадр с fit: contain показывается целиком; по бокам остаётся фон рамки.
@@ -279,7 +262,6 @@
   .pj--pano .pj__b img { position: absolute; inset: 0; }
   .pj--pano .pj__c { grid-column: 9 / 13; }
 }
-.gallery__empty { padding: var(--s-9) 0; color: var(--fg-muted); }
 
 /* ============================================================ 05 CASE STUDY */
 .case { background: var(--g-950); }
