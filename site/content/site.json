@@ -262,10 +262,9 @@
         "type": "Гардеробная",
         "images": [
           {
-            "src": "https://images.unsplash.com/photo-1722942626030-864388d62b3d?auto=format&w=1600&q=80",
+            "src": "media/proj-p02-wide.jpg",
             "role": "wide",
-            "alt": "Кухня вдоль окна",
-            "fallback": "media/proj-p02-wide.jpg"
+            "alt": "Кухня вдоль окна"
           },
           {
             "src": "media/proj-p02-band.jpg",
