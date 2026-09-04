@@ -268,10 +268,9 @@
             "fallback": "media/proj-p02-wide.jpg"
           },
           {
-            "src": "https://images.unsplash.com/photo-1640357154220-9775b0f31dec?auto=format&w=1600&q=80",
+            "src": "media/proj-p02-band.jpg",
             "role": "band",
-            "alt": "Стена фасадов",
-            "fallback": "media/proj-p02-band.jpg"
+            "alt": "Стена фасадов"
           },
           {
             "src": "media/proj-p02-detail.jpg",
